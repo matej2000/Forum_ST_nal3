@@ -1,9 +1,10 @@
 <?php
 
+include 'ViewHelper.php';
 session_start();
 
 define("BASE_URL", $_SERVER["SCRIPT_NAME"] . "/");
-define("ASSETS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "assets/");
+
 
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
@@ -12,10 +13,18 @@ $urls = [
         ViewHelper::render("View/test.php");
     },
     "user/login" => function() {
-        echo "Nedela se";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            echo "Prijavljen";
+        } else {
+            ViewHelper::render("View/user-login.php");
+        }
     },
     "user/register" => function(){
-        echo "Nedela se";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            echo "Registriran";
+        } else {
+            ViewHelper::render("View/user-register.php");
+        }
     },
 
     "" => function(){
@@ -25,7 +34,7 @@ $urls = [
 
 try{
     if(isset($urls[$path])){
-        $urls[$path];
+        $urls[$path]();
     }
     else{
         echo "No cotroller for '$path'";
