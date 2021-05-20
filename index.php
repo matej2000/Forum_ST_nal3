@@ -2,6 +2,7 @@
 
 include 'ViewHelper.php';
 require_once('Controller/UserController.php');
+require_once('Controller/ForumController.php');
 session_start();
 
 define("BASE_URL", $_SERVER["SCRIPT_NAME"] . "/");
@@ -11,7 +12,13 @@ $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
     "forum" => function(){
-        ViewHelper::render("View/test.php");
+        ViewHelper::render("View/forum.php");
+    },
+    "forum/search" => function(){
+        ForumController::search();
+    },
+    "forum/add" => function(){
+        echo "V izdelavi";
     },
     "user/login" => function() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,7 +29,7 @@ $urls = [
     },
     "user/register" => function(){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            echo "Registriran";
+            echo UserController::register();
         } else {
             ViewHelper::render("View/user-register.php");
         }

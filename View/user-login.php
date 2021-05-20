@@ -16,5 +16,10 @@
         </p>
         <p><button>Log-in</button></p>
     </form>
+
+<?php if (isset($errorMessage)){
+        echo $errorMessage;
+
+    }?>
 </body>
 </html>

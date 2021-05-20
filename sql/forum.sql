@@ -34,7 +34,7 @@ create table Post
    Pos_IdPost int(11),
    Id int(11) not null,
    Title varchar(255) not null,
-   Content varchar(255) not null,
+   Content text not null,
    Date timestamp not null,
    Likes int(11) not null,
    primary key (IdPost)
@@ -49,8 +49,11 @@ create table User
    UserName varchar(255) not null,
    Email varchar(255) not null,
    Password varchar(255) not null,
+   Birthday TIMESTAMP not null,
    primary key (Id)
 );
+
+ALTER TABLE post ADD FULLTEXT(Title, Content);
 
 alter table Post add constraint FK_category foreign key (IdC)
       references Category (IdC) on delete restrict on update restrict;
@@ -65,3 +68,4 @@ alter table Post add constraint FK_post foreign key (Id)
 insert into User (UserName, Email, Password) VALUES ("admin", "admin@gmail.com", "admin");
 insert into Category (TitleC, DescriptionC) VALUES ("Test", "Test dp");
 
+insert into Post (IdC, Id, Title, Content, Date, Likes) values (1,1,"Prva objava", "Forum dela! Podajte vprešanja.", CURRENT_TIMESTAMP, 0)

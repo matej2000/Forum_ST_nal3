@@ -23,4 +23,15 @@ class UserController {
             ]);
        }
     }
+
+    public static function register(){
+        if (UserDB::validRegisterAttempt($_POST["username"],$_POST["email"], $_POST["birthday"], $_POST["password"])){
+            UserDB::register($_POST["username"],$_POST["email"], $_POST["birthday"], $_POST["password"]);
+        }
+        else{
+            ViewHelper::render("view/user-register.php", [
+                "errorMessage" => "Email or username allready taken."
+            ]);
+        }
+    }
 }

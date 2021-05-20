@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Nevem se kaj bo to</h1>
+    <?php echo $username?>
 </body>
 </html>
