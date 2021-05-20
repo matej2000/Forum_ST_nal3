@@ -1,6 +1,7 @@
 <?php
 
 include 'ViewHelper.php';
+require_once('Controller/UserController.php');
 session_start();
 
 define("BASE_URL", $_SERVER["SCRIPT_NAME"] . "/");
@@ -9,12 +10,12 @@ define("BASE_URL", $_SERVER["SCRIPT_NAME"] . "/");
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
-    "main" => function(){
+    "forum" => function(){
         ViewHelper::render("View/test.php");
     },
     "user/login" => function() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            echo "Prijavljen";
+            UserController::login();
         } else {
             ViewHelper::render("View/user-login.php");
         }
@@ -28,7 +29,7 @@ $urls = [
     },
 
     "" => function(){
-        ViewHelper::redirect(BASE_URL . "main");
+        ViewHelper::redirect(BASE_URL . "forum");
     },
 ];
 

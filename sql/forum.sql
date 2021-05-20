@@ -61,3 +61,7 @@ alter table Post add constraint FK_comment foreign key (Pos_IdPost)
 alter table Post add constraint FK_post foreign key (Id)
       references User (Id) on delete restrict on update restrict;
 
+
+insert into User (UserName, Email, Password) VALUES ("admin", "admin@gmail.com", "admin");
+insert into Category (TitleC, DescriptionC) VALUES ("Test", "Test dp");
+
