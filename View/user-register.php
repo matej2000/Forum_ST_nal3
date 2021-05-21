@@ -12,9 +12,14 @@
     <p>
         <label>Username: <input type="text" name="username" autocomplete="off" 
             required autofocus /></label><br/>
-        <label>Email <input type="email" name="email" required /></label><br>
-        <label>Birthday <input type="date" name="birthday" required min="1900-01-01" max="<?= date("Y-m-d") ?>"></label><br>
-        <label>Password: <input type="password" name="password" required pattern=".{8,}"/></label>
+        <p><label>Email <input type="email" name="email" required />
+            <span class="important"><?= $errors["exist"] ?></span></label></p>
+        <p><label>Birthday <input type="date" name="birthday" required min="1900-01-01" max="<?= date("Y-m-d") ?>">
+            <span class="important"><?= $errors["birthday"] ?></span></label></p>
+        <p><label>Password: <input type="password" name="password" required pattern=".{8,}"/>
+            <span class="important"><?= $errors["password"] ?></span></label></p>
+        
+        
     </p>
     <p><button>Register</button></p>
 </form>

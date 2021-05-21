@@ -65,7 +65,7 @@ alter table Post add constraint FK_post foreign key (Id)
       references User (Id) on delete restrict on update restrict;
 
 
-insert into User (UserName, Email, Password) VALUES ("admin", "admin@gmail.com", "admin");
+insert into User (UserName, Email, Password) VALUES ("admin", "admin@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O");
 insert into Category (TitleC, DescriptionC) VALUES ("Test", "Test dp");
 
 insert into Post (IdC, Id, Title, Content, Date, Likes) values (1,1,"Prva objava", "Forum dela! Podajte vprešanja.", CURRENT_TIMESTAMP, 0)
