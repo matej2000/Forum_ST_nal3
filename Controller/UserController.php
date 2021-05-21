@@ -25,6 +25,18 @@ class UserController {
     }
 
     public static function register(){
+        // TODO: dokončaj
+        $ruls = [
+            "birthday" => [
+                "filter" => FILTER_CALLBACK,
+                "options" => function ($value) {return (strtotime($value) <= strtotime('-18 year'));}
+            ],
+            "password" =>[
+                "filter" => FILTER_VALIDATE_REGEXP,
+                "options" => ["regexp" => "/[0-9]*/"]
+            ]
+            ];
+
         if (UserDB::validRegisterAttempt($_POST["username"],$_POST["email"], $_POST["birthday"], $_POST["password"])){
             UserDB::register($_POST["username"],$_POST["email"], $_POST["birthday"], $_POST["password"]);
         }

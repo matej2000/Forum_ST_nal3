@@ -7,11 +7,11 @@ drop database if exists forum;
 create database forum;
 use forum;
 
-/*drop table if exists Category;*/
+drop table if exists Category;
 
-/*drop table if exists Post;*/
+drop table if exists Post;
 
-/*drop table if exists User;*/
+drop table if exists User;
 
 /*==============================================================*/
 /* Table: Category                                              */

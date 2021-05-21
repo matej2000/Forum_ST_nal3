@@ -8,15 +8,22 @@ class UserDB {
     public static function validLoginAttempt($username, $password) {
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("SELECT COUNT(id) FROM user WHERE username = :username AND password = :password");
+        $query = $db->prepare("SELECT password FROM user WHERE username = :username");
         $query->bindParam(":username", $username);
-        $query->bindParam(":password", $password );
         $query->execute();
 
-        return $query->fetchColumn(0) == 1;
+        $user = $query->fetch();
+
+        if(password_verify($password, $user["password"])){
+            unset($user["password"]);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
-    public static function validRegisterAttempt($username, $email, $password){
+    public static function validRegisterAttempt($username, $email, $birthday, $password){
         $db = DBInit::getInstance();
 
         $query = $db->prepare("SELECT COUNT(id) FROM user WHERE username = :username OR email = :email");
@@ -34,9 +41,9 @@ class UserDB {
 
         $query->bindParam(":username", $username);
         $query->bindParam(":email", $email );
-        $query->bindParam(":birhday", $birthday);
-        $query->bindParam(":password", $password);
-        $query->execute();
+        $query->bindParam(":birthday", $birthday);
+        $hash= password_hash($password, PASSWORD_DEFAULT);
+        $query->bindParam(":password", $hash);
         $query->execute();
     }
 }

@@ -13,8 +13,8 @@
         <label>Username: <input type="text" name="username" autocomplete="off" 
             required autofocus /></label><br/>
         <label>Email <input type="email" name="email" required /></label><br>
-        <label>Birthday <input type="date" name="birthday" required min="1900-01-01" max="<?php date("Y-m-d") ?>"></label><br>
-        <label>Password: <input type="password" name="password" required /></label>
+        <label>Birthday <input type="date" name="birthday" required min="1900-01-01" max="<?= date("Y-m-d") ?>"></label><br>
+        <label>Password: <input type="password" name="password" required pattern=".{8,}"/></label>
     </p>
     <p><button>Register</button></p>
 </form>
