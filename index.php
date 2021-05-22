@@ -14,7 +14,8 @@ $urls = [
     "forum" => function(){
         if (isset($_GET["query"])) {
             ForumController::search();
-        } else {
+        } 
+        else {
             ForumController::content();
         }
         
@@ -23,7 +24,22 @@ $urls = [
         ForumController::search();
     },
     "forum/add" => function(){
-        echo "V izdelavi";
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            ForumController::post();
+            ViewHelper::render("View/forum-added.php");
+            // TODO: odpri okno objavljeno.
+        }
+        else{
+            ForumController::add();
+        }
+    },
+    "forum/category" => function(){
+        if (isset($_GET["idc"])){
+            ForumController::addPost();
+        }
+        else{
+            //TODO: kaj se zgodi ko idc ni nastavljen
+        }
     },
     "user/login" => function() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
