@@ -15,7 +15,7 @@
 
     <ul>
         <?php foreach ($hits as $forumPost): ?>
-            <li><a href="<?= BASE_URL . "book?id=" . $forumPost["IdPost"] ?>"><?= $forumPost["Title"] ?>: 
+            <li><a href="<?= BASE_URL . "forum?id=" . $forumPost["IdPost"] ?>"><?= $forumPost["Title"] ?>: 
                 </a></li>
         <?php endforeach; ?>
     </ul>

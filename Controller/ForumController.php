@@ -16,4 +16,16 @@ class ForumController {
         }
         ViewHelper::render("View/forum-search.php", ["hits" => $hits, "query" => $query]);
     }
+
+    public static function content(){
+        if(isset($_GET["id"])){
+            $forum = ForumDB::get($_GET["id"]);
+            // TODO: PREVERI ČE OBSTAJA
+            ViewHelper::render("View/forum-content.php", ["forum" =>  $forum, "comments" => ForumDB::getComments($_GET["id"])]);
+        }
+        else{
+            $query = "";
+            ViewHelper::render("View/forum.php", ["query" => $query]);
+        }
+    }
 }

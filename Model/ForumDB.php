@@ -14,4 +14,22 @@ class ForumDB{
 
         return $statement->fetchAll();
     }
+
+    public static function get($id){
+        $db = DBInit::getInstance();
+
+        $statement = $db->prepare("SELECT * FROM post WHERE IdPost = :IdPost");
+        $statement->bindValue(":IdPost", $id);
+        $statement->execute();
+        return $statement->fetch();
+    }
+
+    public static function getComments($id){
+        $db = DBInit::getInstance();
+
+        $statement = $db->prepare("SELECT * FROM post WHERE Pos_IdPost = :Pos_IdPost ORDER BY Likes");
+        $statement->bindValue(":Pos_IdPost", $id);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
 }

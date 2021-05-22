@@ -12,7 +12,12 @@ $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
     "forum" => function(){
-        ViewHelper::render("View/forum.php");
+        if (isset($_GET["query"])) {
+            ForumController::search();
+        } else {
+            ForumController::content();
+        }
+        
     },
     "forum/search" => function(){
         ForumController::search();

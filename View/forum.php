@@ -13,5 +13,11 @@
 <a href="<?= BASE_URL . "forum/add" ?>">Add new</a> |
 <a href="<?= BASE_URL . "user/login" ?>">Log-in</a>
 ]</p>
+
+    <form action="<?= BASE_URL . "forum/search" ?>" method="get">
+            <label for="query">Search:</label>
+            <input type="text" name="query" id="query" value="<?= $query ?>" />
+            <button>Search</button>
+    </form>
 </body>
 </html>
