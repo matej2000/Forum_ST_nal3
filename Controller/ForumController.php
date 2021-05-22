@@ -69,6 +69,11 @@ class ForumController {
         }
         $category = ForumDB::getCategory($_GET["idc"]);
         $hits = ForumDB::categoryPosts($_GET["idc"], $query);
+        foreach($hits as $key => $hit){
+            if($hit["Pos_IdPost"] != null){
+                unset($hits[$key]);
+            }
+        }
         ViewHelper::render("View/forum-category-posts.php", ["hits" => $hits, "query" => $query, "category" => $category]);
     }
 
