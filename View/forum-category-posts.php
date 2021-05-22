@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search category</title>
 </head>
+<h2>Category: <?=$category["TitleC"] ?></h2>
 <body>
-<form action="<?= BASE_URL . "forum/category" ?>" method="get">
+    <form action="<?= BASE_URL . "forum/category" ?>" method="get">
         <label for="query">Search:</label>
         <input type="text" name="query" id="query" value="<?= $query ?>" />
+        <input type="hidden" name="idc" value="<?= $category["IdC"]?>"/>
         <button>Search</button>
     </form>
     <ul>
-        <?php foreach ($hits as $category): ?>
-            <li><a href="<?= BASE_URL . "forum/category?idc=" . $category["IdC"] ?>"><?= $category["TitleC"] ?>: <?=$category["DescriptionC"]?>
-                </a></li>
+        <?php foreach ($hits as $forumPost): ?>
+            <li><a href="<?= BASE_URL . "forum?id=" . $forumPost["IdPost"] ?>"><?= $forumPost["Title"] ?>: </a></li>
         <?php endforeach; ?>
     </ul>
 </body>

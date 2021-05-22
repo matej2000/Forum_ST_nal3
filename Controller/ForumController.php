@@ -34,10 +34,6 @@ class ForumController {
         }
     }
 
-    public static function addPost(){
-        $category = ForumDB::getCategory($_GET("idc"));
-        ViewRender::render("View/forum-add.php", ["categry" => $category]);
-    }
 
     public static function add(){
         if(isset($_GET["idc"])){
@@ -60,5 +56,31 @@ class ForumController {
     public static function post(){
         //TODO: doadaj post v podatkovno bazo, dodaj sesion, preverjanje uporabnika
         //ForumDB::insertPost($_GET["TitleC"], $_GET["DescriptionC"], $_GET[""]);
+    }
+
+    public static function categoryPosts(){
+        // Vrni poste za podano kategorijo
+        if(isset($_GET["query"])){
+            $query = $_GET["query"];
+            
+        }
+        else{
+            $query = "";
+        }
+        $category = ForumDB::getCategory($_GET["idc"]);
+        $hits = ForumDB::categoryPosts($_GET["idc"], $query);
+        ViewHelper::render("View/forum-category-posts.php", ["hits" => $hits, "query" => $query, "category" => $category]);
+    }
+
+    public static function searchCategory(){
+        //Vrni categorije na podlagi iskanih podatkov.
+        if(isset($_GET["query"])){
+            $query = $_GET["query"];
+        }
+        else{
+            $query = "";
+        }
+        $hits = ForumDB::getCategories($query);
+        ViewHelper::render("View/forum-categories.php", ["hits" => $hits, "query" => $query]);
     }
 }

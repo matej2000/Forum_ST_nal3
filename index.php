@@ -35,9 +35,10 @@ $urls = [
     },
     "forum/category" => function(){
         if (isset($_GET["idc"])){
-            ForumController::addPost();
+            ForumController::categoryPosts();
         }
         else{
+            ForumController::searchCategory();
             //TODO: kaj se zgodi ko idc ni nastavljen
         }
     },

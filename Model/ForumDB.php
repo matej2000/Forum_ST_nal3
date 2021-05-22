@@ -56,4 +56,17 @@ class ForumDB{
     public static function insertPost($id, $title, $description, $idc){
         //TODO: VPIS V BAZO
     }
+
+    public static function categoryPosts($idc, $query){
+        $db = DBInit::getInstance();
+
+        $statement = $db->prepare("SELECT * FROM post
+            WHERE IdC = :IdC AND (Title LIKE :query OR Content LIKE :query) ORDER BY Likes");
+        $statement->bindParam(":IdC", $idc);
+        $queryt = '%' . $query . '%';
+        $statement->bindParam(":query", $queryt);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }
