@@ -15,7 +15,9 @@ class UserController {
                 "username" => $_POST["username"],
                 "password" => $_POST["password"]
             ];
-
+            
+            $_SESSION["username"] = $_POST["username"];
+            $_SESSION["id"] = UserDB::getId($_POST["username"]);
             ViewHelper::render("view/test.php", $vars);
        } else {
             ViewHelper::render("view/user-login.php", [

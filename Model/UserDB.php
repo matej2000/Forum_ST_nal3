@@ -76,5 +76,15 @@ class UserDB {
         $query->bindParam(":password", $hash);
         $query->execute();
     }
+
+    public static function getId($username){
+        $db = DBInit::getInstance();
+
+        $query = $db->prepare("SELECT id FROM user WHERE username = :username");
+        $query->bindParam(":username", $username);
+        $query->execute();
+
+        return $query->fetch();
+    }
 }
 

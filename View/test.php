@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>Nevem se kaj bo to</h1>
-    <?php echo $username?>
+    <?php echo $_SESSION["username"]?>
 </body>
 </html>
