@@ -86,5 +86,16 @@ class UserDB {
 
         return $query->fetch();
     }
+
+    public static function getUser($id){
+        $db = DBInit::getInstance();
+        
+        $query = $db->prepare("SELECT Id, UserName, Email  FROM user WHERE Id = :Id");
+        $query->bindParam(":Id", $id);
+        $query->execute();
+
+        return $query->fetch();
+
+    }
 }
 

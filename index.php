@@ -52,6 +52,14 @@ $urls = [
             ViewHelper::redirect(BASE_URL . "user/login");
         }
     },
+    "forum/comment" => function(){
+        if(isset($_SESSION["username"])){
+            ForumController::comment();
+        }
+        else{
+            ViewHelper::redirect(BASE_URL . "user/login");
+        }
+    },
     "user/login" => function() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             UserController::login();
@@ -79,10 +87,6 @@ $urls = [
         }
         ViewHelper::redirect(BASE_URL . "forum");
     },
-    "test" => function(){
-        ViewHelper::render("View/test.php");
-    },
-
     "" => function(){
         ViewHelper::redirect(BASE_URL . "forum");
     },

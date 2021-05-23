@@ -1,0 +1,72 @@
+.uppload-date{
+    font-size: 15px;
+    position:absolute;
+    right: 0px;
+    bottom: 0px;
+}
+.post{
+    position:relative;
+}
+
+.post a{
+    font-size: 20px;
+}
+
+.search{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    align-content: center;
+    text-align: center;
+}
+
+.posts{
+    padding-left: 20px;
+    border-left: solid grey 1px;
+}
+
+.inputs input{
+    width: 100%;
+    padding: .6em .7em;
+    max-width: 24.3076923rem !important;
+}
+
+.inputs{
+    margin: 20px;
+    position: relative;
+}
+
+.input button{
+    align-items: center;
+    text-align: center;
+}
+
+.center{
+    max-width: 24.3076923rem !important;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.c{
+    max-width: 40rem !important;
+    align-items: center;
+}
+.s{
+    display: inline;
+    align-items: center;
+}
+.c2{
+    max-width: 40rem !important;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.inputs2 input, textarea{
+    width: 100%;
+    padding: .6em .7em;
+    max-width: 40 !important;
+}
+
+.inputs2{
+    margin: 20px;
+    position: relative;
+}

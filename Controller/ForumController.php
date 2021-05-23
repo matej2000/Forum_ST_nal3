@@ -9,15 +9,15 @@ class ForumController {
     public static function search(){
         if (isset($_GET["query"])) {
             $query = $_GET["query"];
-            $hits = ForumDB::search($query);
-            foreach($hits as $key => $hit){
-                if($hit["Pos_IdPost"] != null){
-                    unset($hits[$key]);
-                }
-            }
+            
         } else {
             $query = "";
-            $hits = [];
+        }
+        $hits = ForumDB::search($query);
+        foreach($hits as $key => $hit){
+            if($hit["Pos_IdPost"] != null){
+                unset($hits[$key]);
+            }
         }
         ViewHelper::render("View/forum-search.php", ["hits" => $hits, "query" => $query]);
     }
@@ -25,8 +25,15 @@ class ForumController {
     public static function content(){
         if(isset($_GET["id"])){
             $forum = ForumDB::get($_GET["id"]);
+            $comments = ForumDB::getComments($_GET["id"]);
+            $authorF = UserDB::getUser($_GET["id"]);
+            $usersC = [];
+            foreach($comments as $comment){
+                array_push($usersC, UserDB::getUser($comment["Id"]));
+            }
+            
             // TODO: PREVERI ČE OBSTAJA
-            ViewHelper::render("View/forum-content.php", ["forum" =>  $forum, "comments" => ForumDB::getComments($_GET["id"])]);
+            ViewHelper::render("View/forum-content.php", ["forum" =>  $forum, "comments" => $comments, "author" => $authorF, "usersc" => $usersC]);
         }
         else{
             $query = "";
@@ -104,5 +111,10 @@ class ForumController {
             }
         }*/
         ViewHelper::render("View/forum-myposts.php", ["hits" => $hits, "query" => $query]);
+    }
+
+    public static function comment(){
+        ForumDB::comment($_POST["IdC"], $_POST["Pos_IdPost"], $_POST["Id"], "", $_POST["content"]);
+        ViewHelper::redirect(BASE_URL . "forum?id=" . $_POST["Pos_IdPost"]);
     }
 }

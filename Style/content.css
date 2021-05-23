@@ -1,0 +1,29 @@
+.comment{
+    border-bottom: solid grey 1px;
+    position: relative;
+}
+
+.comments{
+    padding-bottom: 50px;
+}
+
+.user{
+    font-size: 12px;
+}
+
+.uppload-date{
+    font-size: 15px;
+    position:absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.post{
+    border-bottom: solid grey 1px;
+    position: relative;
+    padding-bottom: 20px;
+}
+.center{
+    padding-top: 50px;
+    text-align: center;
+}
