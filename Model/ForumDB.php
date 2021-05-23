@@ -55,6 +55,20 @@ class ForumDB{
 
     public static function insertPost($id, $title, $description, $idc){
         //TODO: VPIS V BAZO
+        $db = DBInit::getInstance();
+
+        $query = $db->prepare("INSERT INTO post (IdC, Id, Title, Content, Date, Likes) VALUES (:IdC, :Id, :Title, :Content, :Date, :Likes);");
+
+        $query->bindParam(":IdC", $idc);
+        $query->bindParam(":Id", $id );
+        $query->bindParam(":Title", $title);
+        $query->bindParam(":Content", $description);
+        $d = date('Y-m-d H:i:s');
+        $query->bindParam(":Date", $d);
+        $v = 0;
+        $query->bindParam(":Likes", $v);
+        $query->execute();
+
     }
 
     public static function categoryPosts($idc, $query){

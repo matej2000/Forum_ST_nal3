@@ -1,3 +1,10 @@
+<?php 
+    if(!isset($_SESSION["username"])) 
+    { 
+        ViewHelper::redirect(BASE_URL . "user/login");
+    } 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

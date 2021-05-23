@@ -25,9 +25,10 @@ $urls = [
     },
     "forum/add" => function(){
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            ForumController::post();
-            ViewHelper::render("View/forum-added.php");
-            // TODO: odpri okno objavljeno.
+            if(isset($_SESSION["username"])){
+                ForumController::post();
+                ViewHelper::render("View/forum-added.php");
+            }
         }
         else{
             ForumController::add();
@@ -55,6 +56,9 @@ $urls = [
         } else {
             ViewHelper::render("View/user-register.php");
         }
+    },
+    "test" => function(){
+        ViewHelper::render("View/test.php");
     },
 
     "" => function(){

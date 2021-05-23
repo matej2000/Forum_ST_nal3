@@ -43,19 +43,20 @@ class ForumController {
         else{
             if(isset($_GET["query"])){
                 $query = $_GET["query"];
-                $hits = ForumDB::getCategories($_GET["query"]);
+               
             }
             else{
                 $query = "";
-                $hits = [];
             }
+            $hits = ForumDB::getCategories($query);
             ViewHelper::render("View/forum-select-category.php", ["hits" => $hits, "query" => $query]);
         }
     }
 
     public static function post(){
         //TODO: doadaj post v podatkovno bazo, dodaj sesion, preverjanje uporabnika
-        //ForumDB::insertPost($_GET["TitleC"], $_GET["DescriptionC"], $_GET[""]);
+        ForumDB::insertPost(end($_SESSION["id"]), $_POST["title"], $_POST["content"], $_POST["idc"]);
+
     }
 
     public static function categoryPosts(){
