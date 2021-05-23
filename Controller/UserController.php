@@ -31,6 +31,7 @@ class UserController {
         $resoult = UserDB::validRegisterAttempt($_POST["username"],$_POST["email"], $_POST["birthday"], $_POST["password"]);
         if ($resoult === false){
             UserDB::register($_POST["username"],$_POST["email"], $_POST["birthday"], $_POST["password"]);
+            ViewHelper::render("View/user-registered.php");
         }
         /*else{
             ViewHelper::render("view/user-register.php", [

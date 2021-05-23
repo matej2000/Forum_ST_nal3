@@ -7,12 +7,13 @@
     <title>Forum</title>
 </head>
 <body>
-<p>[
-<a href="<?= BASE_URL . "forum" ?>">Forum</a> |
-<a href="<?= BASE_URL . "forum/search" ?>">Search</a> |
-<a href="<?= BASE_URL . "forum/add" ?>">Add new</a> |
-<a href="<?= BASE_URL . "user/login" ?>">Log-in</a>
-]</p>
+<?php if(isset($_SESSION["username"])){
+        include("View/user-login-header.php");
+    }
+    else{
+        include("View/user-notlogin-header.php");
+    }
+?>
 
     <form action="<?= BASE_URL . "forum/search" ?>" method="get">
             <label for="query">Search:</label>

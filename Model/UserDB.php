@@ -38,7 +38,7 @@ class UserDB {
         ];
         //.*[0-9]+.*
         $data = filter_input_array(INPUT_POST, $rules);
-        $passTest1 = filter_var($password, FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[0-9]*$/"]]);
+        $passTest1 = filter_var($password, FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/[0-9]*/"]]);
     
         $errors["username"] = $data["username"] === false ? "Provide the username: only letters, dots, dashes and spaces are allowed." : "";
         $errors["email"] = $data["email"] === false ? "Wrong email format." : "";
@@ -55,7 +55,7 @@ class UserDB {
 
         $isDataValid = true;
         foreach ($errors as $error) {
-            $isDataValid = $isDataValid && empty($errors);
+            $isDataValid = $isDataValid && empty($error);
         }
         
         if($isDataValid){

@@ -52,10 +52,23 @@ $urls = [
     },
     "user/register" => function(){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            echo UserController::register();
+            UserController::register();
         } else {
-            ViewHelper::render("View/user-register.php");
+            $errors["username"] = "";
+            $errors["email"] = "";
+            $errors["birthday"] =  "";
+            $errors["password"] = "";
+            $errors["exist"] = "";
+            ViewHelper::render("View/user-register.php", ["errors" => $errors]);
         }
+    },
+    "user/logout" => function(){
+        if(isset($_SESSION["username"])){
+            session_start();
+            $_SESSION = array();
+            session_destroy();
+        }
+        ViewHelper::redirect(BASE_URL . "forum");
     },
     "test" => function(){
         ViewHelper::render("View/test.php");
