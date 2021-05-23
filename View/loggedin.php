@@ -7,9 +7,14 @@
     <?php include("View/import.php"); ?>
     <title>Document</title>
 </head>
+<?php include("View/user-login-header.php") ?>
 <body>
-    <?php include("View/user-login-header.php") ?>
-    <h1>Nevem se kaj bo to</h1>
-    <?php echo $_SESSION["username"]?>
+    
+    <div class="container">
+        <div style="text-align:center;">
+            <h1>Welcome back <?=$_SESSION["username"]?></h1>
+        </div>
+    </div>
+
 </body>
 </html>

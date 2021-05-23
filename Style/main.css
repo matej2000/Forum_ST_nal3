@@ -1,8 +1,8 @@
 .uppload-date{
     font-size: 15px;
-    position:absolute;
+    margin-top: 10px;
     right: 0px;
-    bottom: 0px;
+    text-align: right;
 }
 .post{
     position:relative;
@@ -69,4 +69,16 @@
 .inputs2{
     margin: 20px;
     position: relative;
+}
+
+.inputs3 input{
+    width: 100%;
+    padding: .6em .7em;
+    max-width: 40 !important;
+}
+
+.inputs3{
+    margin: 20px;
+    text-align: center;
+    align-items: center;
 }

@@ -11,6 +11,10 @@
     include("View/user-login-header.php");
 ?>
 <body>
-    <h1>Post added</h1>
+    <div class="container">
+        <div style="text-align:center;">
+            <h1>Post added</h1>
+        </div>
+    </div>
 </body>
 </html>

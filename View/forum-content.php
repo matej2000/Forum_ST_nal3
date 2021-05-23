@@ -20,7 +20,12 @@
         <div class="post">
             <h1><?= $forum["Title"] ?></h1>
             <div class="user">
-                <p> <?= $author["UserName"] ?> </p>
+                <p> <?php 
+                    if(is_array($author)){
+                        echo $author["UserName"];
+                    }
+                    ?> 
+                </p>
             </div>
             <div>
                 <p><?= $forum["Content"] ?> </p>

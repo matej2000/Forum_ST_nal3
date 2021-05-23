@@ -18,7 +18,7 @@ class UserController {
             
             $_SESSION["username"] = $_POST["username"];
             $_SESSION["id"] = UserDB::getId($_POST["username"]);
-            ViewHelper::render("view/test.php", $vars);
+            ViewHelper::render("view/loggedin.php", $vars);
        } else {
             ViewHelper::render("view/user-login.php", [
                 "errorMessage" => "Invalid username or password."

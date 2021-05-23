@@ -26,7 +26,7 @@ class ForumController {
         if(isset($_GET["id"])){
             $forum = ForumDB::get($_GET["id"]);
             $comments = ForumDB::getComments($_GET["id"]);
-            $authorF = UserDB::getUser($_GET["id"]);
+            $authorF = UserDB::getUser($forum["Id"]);
             $usersC = [];
             foreach($comments as $comment){
                 array_push($usersC, UserDB::getUser($comment["Id"]));
