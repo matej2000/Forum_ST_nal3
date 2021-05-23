@@ -98,11 +98,11 @@ class ForumController {
             $query = "";
         }
         $hits = ForumDB::getMyPosts(end($_SESSION["id"]), $query);
-        foreach($hits as $key => $hit){
+        /*foreach($hits as $key => $hit){
             if($hit["Pos_IdPost"] != null){
               unset($hits[$key]);
             }
-        }
+        }*/
         ViewHelper::render("View/forum-myposts.php", ["hits" => $hits, "query" => $query]);
     }
 }

@@ -14,8 +14,22 @@
     </form>
     <ul>
         <?php foreach ($hits as $hit): ?>
-            <li><a href="<?= BASE_URL . "forum?id=" . $hit["IdPost"] ?>"><?= $hit["Title"] ?>: <?=$hit["Content"]?>
-                </a></li>
+            <li><a href="
+                <?php 
+                    if($hit["Pos_IdPost"] != null){
+                        echo BASE_URL . "forum?id=" . $hit["Pos_IdPost"];
+                    }
+                    else{
+                        echo BASE_URL . "forum?id=" . $hit["IdPost"];
+                    }
+                ?>
+            ">
+            <?php 
+                if($hit["Pos_IdPost"] != null){
+                    echo "Comment: ";
+                }
+            ?>
+            <?= $hit["Title"] ?>: <?=$hit["Content"]?></a></li>
         <?php endforeach; ?>
     </ul>
 </body>
