@@ -89,4 +89,20 @@ class ForumController {
         $hits = ForumDB::getCategories($query);
         ViewHelper::render("View/forum-categories.php", ["hits" => $hits, "query" => $query]);
     }
+
+    public static function myPosts(){
+        if(isset($_GET["query"])){
+            $query = $_GET["query"];
+        }
+        else{
+            $query = "";
+        }
+        $hits = ForumDB::getMyPosts(end($_SESSION["id"]), $query);
+        foreach($hits as $key => $hit){
+            if($hit["Pos_IdPost"] != null){
+              unset($hits[$key]);
+            }
+        }
+        ViewHelper::render("View/forum-myposts.php", ["hits" => $hits, "query" => $query]);
+    }
 }

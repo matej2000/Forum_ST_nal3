@@ -83,4 +83,17 @@ class ForumDB{
 
         return $statement->fetchAll();
     }
+
+    public static function getMyPosts($id, $query){
+        $db = DBInit::getInstance();
+
+        $statement = $db->prepare("SELECT * FROM post
+            WHERE Id = :Id AND (Title LIKE :query OR Content LIKE :query) ORDER BY Likes");
+        $statement->bindParam(":Id", $id);
+        $queryt = '%' . $query . '%';
+        $statement->bindParam(":query", $queryt);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }

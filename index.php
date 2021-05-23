@@ -43,6 +43,14 @@ $urls = [
             //TODO: kaj se zgodi ko idc ni nastavljen
         }
     },
+    "forum/myposts" => function(){
+        if(isset($_SESSION["username"])){
+            ForumController::myPosts();
+        }
+        else{
+            ViewHelper::redirect(BASE_URL . "user/login");
+        }
+    },
     "user/login" => function() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             UserController::login();

@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <?php include("View/user-login-header.php") ?>
     <h1>Nevem se kaj bo to</h1>
     <?php echo $_SESSION["username"]?>
 </body>
