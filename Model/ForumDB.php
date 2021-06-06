@@ -83,6 +83,16 @@ class ForumDB{
         return $statement->fetchAll();
     }
 
+    public static function addCategory($title, $description){
+        $db = DBInit::getInstance();
+
+        $query = $db->prepare("INSERT INTO Category (TitleC, DescriptionC) VALUES (:Title, :DescriptionC);");
+
+        $query->bindParam(":Title", $title);
+        $query->bindParam(":DescriptionC", $description);
+        $query->execute();
+    }
+
     public static function getMyPosts($id, $query){
         $db = DBInit::getInstance();
 

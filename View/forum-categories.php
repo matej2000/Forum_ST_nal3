@@ -25,6 +25,9 @@
         </div>
         <h1>Categories</h1>
         <div class="posts">
+            <form action="<?= BASE_URL . "forum/addcategory" ?>" method="get">
+                <button>New category</button>
+            </form>
             <?php foreach ($hits as $category): ?>
                 <div class="post">
                 <a href="<?= BASE_URL . "forum/category?idc=" . $category["IdC"] ?>"><?= $category["TitleC"] ?></a>

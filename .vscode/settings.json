@@ -12,6 +12,19 @@
             "database": "forum",
             "username": "root",
             "password": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "forum",
+            "database": "forum",
+            "username": "root",
+            "password": "root"
         }
     ]
 }

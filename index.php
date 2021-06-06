@@ -44,6 +44,14 @@ $urls = [
             //TODO: kaj se zgodi ko idc ni nastavljen
         }
     },
+    "forum/addcategory" => function(){
+        if(isset($_POST["title"])){
+            ForumController::categoryAdd();
+        }
+        else{
+            ViewHelper::render("View/forum-add-categories.php");
+        }
+    },
     "forum/myposts" => function(){
         if(isset($_SESSION["username"])){
             ForumController::myPosts();

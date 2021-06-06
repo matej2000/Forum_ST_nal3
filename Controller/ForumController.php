@@ -61,7 +61,6 @@ class ForumController {
     }
 
     public static function post(){
-        //TODO: doadaj post v podatkovno bazo, dodaj sesion, preverjanje uporabnika
         ForumDB::insertPost(end($_SESSION["id"]), $_POST["title"], $_POST["content"], $_POST["idc"]);
 
     }
@@ -95,6 +94,12 @@ class ForumController {
         }
         $hits = ForumDB::getCategories($query);
         ViewHelper::render("View/forum-categories.php", ["hits" => $hits, "query" => $query]);
+    }
+
+    public static function categoryAdd(){
+        // TODO: preveri če kategorija s tem naslovom že obstaja
+        ForumDB::addCategory($_POST["title"], $_POST["content"]);
+        ViewHelper::redirect(BASE_URL . "forum/add");
     }
 
     public static function myPosts(){
