@@ -53,7 +53,7 @@ create table User
    primary key (Id)
 );
 
-ALTER TABLE post ADD FULLTEXT(Title, Content);
+ALTER TABLE Post ADD FULLTEXT(Title, Content);
 
 alter table Post add constraint FK_category foreign key (IdC)
       references Category (IdC) on delete restrict on update restrict;

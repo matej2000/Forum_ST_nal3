@@ -1,6 +1,6 @@
 <?php
 
-require_once("model/UserDB.php");
+require_once("Model/UserDB.php");
 require_once("ViewHelper.php");
 require_once("Model/ForumDB.php");
 

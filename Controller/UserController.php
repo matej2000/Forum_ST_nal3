@@ -1,12 +1,12 @@
 <?php
 
-require_once("model/UserDB.php");
+require_once("Model/UserDB.php");
 require_once("ViewHelper.php");
 
 class UserController {
 
     public static function showLoginForm() {
-       ViewHelper::render("view/user-login.php");
+       ViewHelper::render("View/user-login.php");
     }
 
     public static function login() {
@@ -18,9 +18,9 @@ class UserController {
             
             $_SESSION["username"] = $_POST["username"];
             $_SESSION["id"] = UserDB::getId($_POST["username"]);
-            ViewHelper::render("view/loggedin.php", $vars);
+            ViewHelper::render("View/loggedin.php", $vars);
        } else {
-            ViewHelper::render("view/user-login.php", [
+            ViewHelper::render("View/user-login.php", [
                 "errorMessage" => "Invalid username or password."
             ]);
        }
@@ -39,7 +39,7 @@ class UserController {
             ]);
         }*/
         else{
-            ViewHelper::render("view/user-register.php", ["errors" => $resoult]);
+            ViewHelper::render("View/user-register.php", ["errors" => $resoult]);
         }
     }
 }

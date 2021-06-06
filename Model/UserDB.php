@@ -8,7 +8,7 @@ class UserDB {
     public static function validLoginAttempt($username, $password) {
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("SELECT password FROM user WHERE username = :username");
+        $query = $db->prepare("SELECT password FROM User WHERE UserName= :username");
         $query->bindParam(":username", $username);
         $query->execute();
 
@@ -47,7 +47,7 @@ class UserDB {
 
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("SELECT COUNT(id) FROM user WHERE username = :username OR email = :email");
+        $query = $db->prepare("SELECT COUNT(Id) FROM User WHERE UsernNme= :username OR Email = :email");
         $query->bindParam(":username", $username);
         $query->bindParam(":email", $email );
         $query->execute();
@@ -67,7 +67,7 @@ class UserDB {
     public static function register($username, $email, $birthday, $password){
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("INSERT INTO user (UserName, Email, Birthday, Password) VALUES (:username, :email, :birthday, :password);");
+        $query = $db->prepare("INSERT INTO User (UserName, Email, Birthday, Password) VALUES (:username, :email, :birthday, :password);");
 
         $query->bindParam(":username", $username);
         $query->bindParam(":email", $email );
@@ -80,7 +80,7 @@ class UserDB {
     public static function getId($username){
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("SELECT id FROM user WHERE username = :username");
+        $query = $db->prepare("SELECT Id FROM User WHERE UserName = :username");
         $query->bindParam(":username", $username);
         $query->execute();
 
@@ -90,7 +90,7 @@ class UserDB {
     public static function getUser($id){
         $db = DBInit::getInstance();
         
-        $query = $db->prepare("SELECT Id, UserName, Email  FROM user WHERE Id = :Id");
+        $query = $db->prepare("SELECT Id, UserName, Email  FROM User WHERE Id = :Id");
         $query->bindParam(":Id", $id);
         $query->execute();
 
