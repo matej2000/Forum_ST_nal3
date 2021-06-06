@@ -2,7 +2,7 @@
 
 class DBInit {
 
-    private static $host = "localhost:3307";
+    private static $host = "localhost";
     private static $user = "root";
     private static $password = "";
     private static $schema = "forum";
