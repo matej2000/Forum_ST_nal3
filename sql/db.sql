@@ -53,6 +53,8 @@ create table User
    primary key (Id)
 );
 
+
+
 ALTER TABLE Post ADD FULLTEXT(Title, Content);
 
 alter table Post add constraint FK_category foreign key (IdC)
@@ -64,12 +66,11 @@ alter table Post add constraint FK_comment foreign key (Pos_IdPost)
 alter table Post add constraint FK_post foreign key (Id)
       references User (Id) on delete restrict on update restrict;
 
+insert into User (UserName, Email, Password,Birthday) VALUES ("admin", "admin@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O", CURRENT_TIMESTAMP);
+insert into User (UserName, Email, Password,Birthday)  VALUES ("admin2", "admin2@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O", CURRENT_TIMESTAMP);
 
-insert into User (UserName, Email, Password) VALUES ("admin", "admin@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O");
-insert into User (UserName, Email, Password) VALUES ("admin2", "admin2@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O");
-
-insert into User (UserName, Email, Password) VALUES ("user1", "user1@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O");
-insert into User (UserName, Email, Password) VALUES ("user2", "user2@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O");
+insert into User (UserName, Email, Password,Birthday) VALUES ("user1", "user1@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O", CURRENT_TIMESTAMP);
+insert into User (UserName, Email, Password,Birthday) VALUES ("user2", "user2@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O", CURRENT_TIMESTAMP);
 insert into Category (TitleC, DescriptionC) VALUES ("Test", "Test pb");
 insert into Category (TitleC, DescriptionC) VALUES ("General", "Genaral");
 insert into Category (TitleC, DescriptionC) VALUES ("PHP", "Ask questions about php.");
