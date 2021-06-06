@@ -27,7 +27,7 @@ class ForumDB{
     public static function getComments($id){
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM post WHERE Pos_IdPost = :Pos_IdPost ORDER BY Likes");
+        $statement = $db->prepare("SELECT * FROM Post WHERE Pos_IdPost = :Pos_IdPost ORDER BY Likes");
         $statement->bindValue(":Pos_IdPost", $id);
         $statement->execute();
         return $statement->fetchAll();

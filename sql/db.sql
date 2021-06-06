@@ -53,6 +53,19 @@ create table User
    primary key (Id)
 );
 
+/*==============================================================*/
+/* Table: Likes                                            */
+/*==============================================================*/
+create table Likes
+(
+   IdLike int(11) not null AUTO_INCREMENT,
+   Id int(11) not null,
+   IdPost int(11) not null,
+   Date TIMESTAMP not null,
+   primary key (IdLike)
+);
+
+
 
 
 ALTER TABLE Post ADD FULLTEXT(Title, Content);
@@ -65,6 +78,13 @@ alter table Post add constraint FK_comment foreign key (Pos_IdPost)
 
 alter table Post add constraint FK_post foreign key (Id)
       references User (Id) on delete restrict on update restrict;
+      
+alter table Likes add constraint FK_likes1 foreign key (Id)
+      references User (Id) on delete restrict on update restrict;
+      
+alter table Likes add constraint FK_likes2 foreign key (IdPost)
+      references Post (IdPost) on delete restrict on update restrict;
+      	
 
 insert into User (UserName, Email, Password,Birthday) VALUES ("admin", "admin@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O", CURRENT_TIMESTAMP);
 insert into User (UserName, Email, Password,Birthday)  VALUES ("admin2", "admin2@gmail.com", "$2y$10$Em7XqNJ1zIq/eKMLo6WdWO7ipPuu05YTd/zUNhHjHj/ucAep3uO9O", CURRENT_TIMESTAMP);
