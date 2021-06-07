@@ -19,22 +19,25 @@
 <body>
 <div class="container">
         <div class="search">
-            <form action="<?= BASE_URL . "forum/search" ?>" method="get">
+            <form action="<?= BASE_URL . "forum/add" ?>" method="get">
                 <input type="text" name="query" id="query" value="<?= $query ?>" />
                 <button>Search</button>
             </form>
         </div>
         <h1>Select category</h1>
         <div class="posts">
+            <form action="<?= BASE_URL . "forum/addcategory" ?>" method="get">
+                <button>New category</button>
+            </form>
             <?php foreach ($hits as $category): ?>
                 <div class="post">
-                <a href="<?= BASE_URL . "forum/add?idc=" . $category["IdC"] ?>"><?= $category["TitleC"] ?></a>
+                <a href="<?= BASE_URL . "forum/add?idc=" . $category["idcategory"] ?>"><?= $category["name"] ?></a>
                     <p><?php
-                        if(strlen($category["DescriptionC"]) <=255){
-                            echo $category["DescriptionC"];
+                        if(strlen($category["description"]) <=255){
+                            echo $category["description"];
                         }
                         else{
-                            echo substr($category["DescriptionC"],0,255) . " ...";
+                            echo substr($category["description"],0,255) . " ...";
                         }
                     ?></p>
                 </div>

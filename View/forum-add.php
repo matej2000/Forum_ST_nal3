@@ -21,7 +21,7 @@
         <h1>Add post</h1>
         <div class="s">
             <div class="c">
-                <h3 style="color:blue;">Category: <?=$category["TitleC"] ?></h3>
+                <h3 style="color:blue;">Category: <?=$category["name"] ?></h3>
                 <form  action="<?= BASE_URL . "forum/add" ?>" method="post">
                     <div class="inputs2">
                         <p><label>Title</label><br/><input type="text" name="title" required/> </p>
@@ -29,7 +29,7 @@
                             <label>Description: <br />
                             <textarea style="resize:none" name="content" rows="10" cols="40" required></textarea></label>
                         </p>
-                        <input type="hidden" name="idc" value="<?=$category["IdC"]?>">
+                        <input type="hidden" name="idc" value="<?=$category["idcategory"]?>">
                     
                         <div class="c2">
                             <button class="btn btn-primary" type="submit">Post</button>

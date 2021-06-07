@@ -30,13 +30,13 @@
             </form>
             <?php foreach ($hits as $category): ?>
                 <div class="post">
-                <a href="<?= BASE_URL . "forum/category?idc=" . $category["IdC"] ?>"><?= $category["TitleC"] ?></a>
+                <a href="<?= BASE_URL . "forum/category?idc=" . $category["idcategory"] ?>"><?= $category["name"] ?></a>
                     <p><?php
-                        if(strlen($category["DescriptionC"]) <=255){
-                            echo $category["DescriptionC"];
+                        if(strlen($category["description"]) <=255){
+                            echo $category["description"];
                         }
                         else{
-                            echo substr($category["DescriptionC"],0,255) . " ...";
+                            echo substr($category["description"],0,255) . " ...";
                         }
                     ?></p>
                 </div>

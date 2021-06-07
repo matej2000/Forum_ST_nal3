@@ -7,8 +7,8 @@ class ForumDB{
     public static function search($query){
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT IdPost, Pos_IdPost, Title, Content, Date, Likes FROM Post
-            WHERE Title LIKE :query OR Content LIKE :query ORDER BY Likes");
+        $statement = $db->prepare("SELECT idpost, post_idpost, title, content, time, likes FROM post
+            WHERE title LIKE :query OR content LIKE :query ORDER BY likes");
         $statement->bindValue(":query", '%' . $query . '%');
         $statement->execute();
 
@@ -18,7 +18,7 @@ class ForumDB{
     public static function get($id){
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM Post WHERE IdPost = :IdPost");
+        $statement = $db->prepare("SELECT * FROM post WHERE idpost = :IdPost");
         $statement->bindValue(":IdPost", $id);
         $statement->execute();
         return $statement->fetch();
@@ -27,7 +27,7 @@ class ForumDB{
     public static function getComments($id){
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM Post WHERE Pos_IdPost = :Pos_IdPost ORDER BY Likes");
+        $statement = $db->prepare("SELECT * FROM post WHERE post_idpost = :Pos_IdPost ORDER BY Likes");
         $statement->bindValue(":Pos_IdPost", $id);
         $statement->execute();
         return $statement->fetchAll();
@@ -36,7 +36,7 @@ class ForumDB{
     public static function getCategory($idc){
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM Category WHERE IdC = :IdC");
+        $statement = $db->prepare("SELECT * FROM category WHERE idcategory = :IdC");
         $statement->bindValue(":IdC", $idc);
         $statement->execute();
         return $statement->fetch();
@@ -45,8 +45,8 @@ class ForumDB{
     public static function getCategories($query){
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM Category
-            WHERE TitleC LIKE :query OR DescriptionC LIKE :query");
+        $statement = $db->prepare("SELECT * FROM category
+            WHERE name LIKE :query OR description LIKE :query");
         $statement->bindValue(":query", '%' . $query . '%');
         $statement->execute();
 
@@ -56,7 +56,7 @@ class ForumDB{
     public static function insertPost($id, $title, $description, $idc){
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("INSERT INTO Post (IdC, Id, Title, Content, Date, Likes) VALUES (:IdC, :Id, :Title, :Content, :Date, :Likes);");
+        $query = $db->prepare("INSERT INTO post (category_idcategory, user_iduser, title, content, time, edited, likes) VALUES (:IdC, :Id, :Title, :Content, :Date, :edited, :Likes);");
 
         $query->bindParam(":IdC", $idc);
         $query->bindParam(":Id", $id );
@@ -65,6 +65,7 @@ class ForumDB{
         $d = date('Y-m-d H:i:s');
         $query->bindParam(":Date", $d);
         $v = 0;
+        $query->bindParam(":edited", $v);
         $query->bindParam(":Likes", $v);
         $query->execute();
 
@@ -73,8 +74,8 @@ class ForumDB{
     public static function categoryPosts($idc, $query){
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM Post
-            WHERE IdC = :IdC AND (Title LIKE :query OR Content LIKE :query) ORDER BY Likes");
+        $statement = $db->prepare("SELECT * FROM post
+            WHERE category_idcategory = :IdC AND (title LIKE :query OR content LIKE :query) ORDER BY likes");
         $statement->bindParam(":IdC", $idc);
         $queryt = '%' . $query . '%';
         $statement->bindParam(":query", $queryt);
@@ -86,7 +87,7 @@ class ForumDB{
     public static function addCategory($title, $description){
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("INSERT INTO Category (TitleC, DescriptionC) VALUES (:Title, :DescriptionC);");
+        $query = $db->prepare("INSERT INTO category (name, desription) VALUES (:Title, :DescriptionC);");
 
         $query->bindParam(":Title", $title);
         $query->bindParam(":DescriptionC", $description);
@@ -96,7 +97,7 @@ class ForumDB{
     public static function existCategory($title){
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("SELECT COUNT(IdC) FROM Category WHERE TitleC= :title");
+        $query = $db->prepare("SELECT COUNT(idcategory) FROM category WHERE name= :title");
         $query->bindParam(":title", $title);
         $query->execute();
         return $query->fetchColumn(0) == 0;
@@ -105,8 +106,8 @@ class ForumDB{
     public static function getMyPosts($id, $query){
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM Post
-            WHERE Id = :Id AND (Title LIKE :query OR Content LIKE :query) ORDER BY Likes");
+        $statement = $db->prepare("SELECT * FROM post
+            WHERE user_iduser = :Id AND (title LIKE :query OR content LIKE :query) ORDER BY likes");
         $statement->bindParam(":Id", $id);
         $queryt = '%' . $query . '%';
         $statement->bindParam(":query", $queryt);
@@ -118,7 +119,7 @@ class ForumDB{
     public static function comment($Idc, $Pos_IdPost, $Id, $title, $Content){
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("INSERT INTO Post (IdC, Pos_IdPost, Id, Title, Content, Date, Likes) VALUES (:IdC, :Pos_IdPost, :Id, :Title, :Content, :Date, :Likes);");
+        $query = $db->prepare("INSERT INTO post (category_idcategory, post_idpost, user_iduser, title, content, time, edited, likes) VALUES (:IdC, :Pos_IdPost, :Id, :Title, :Content, :Date, :edited, :Likes);");
 
         $query->bindParam(":IdC", $Idc);
         $query->bindParam(":Pos_IdPost", $Pos_IdPost);
@@ -128,6 +129,7 @@ class ForumDB{
         $d = date('Y-m-d H:i:s');
         $query->bindParam(":Date", $d);
         $v = 0;
+        $query->bindParam(":edited", $v);
         $query->bindParam(":Likes", $v);
         $query->execute();
     }

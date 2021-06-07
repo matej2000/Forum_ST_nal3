@@ -20,25 +20,25 @@
         <div class="search">
             <form action="<?= BASE_URL . "forum/category" ?>" method="get">
                 <input type="text" name="query" id="query" value="<?= $query ?>" />
-                <input type="hidden" name="idc" value="<?= $category["IdC"]?>"/>
+                <input type="hidden" name="idc" value="<?= $category["idcategory"]?>"/>
                 <button>Search</button>
             </form>
         </div>
-        <h1>Category: <?=$category["TitleC"] ?></h1>
+        <h1>Category: <?=$category["name"] ?></h1>
         <div class="posts">
             <?php foreach ($hits as $forumPost): ?>
                 <div class="post">
-                    <a href="<?= BASE_URL . "forum?id=" . $forumPost["IdPost"] ?>"><?= $forumPost["Title"] ?></a>
+                    <a href="<?= BASE_URL . "forum?id=" . $forumPost["idpost"] ?>"><?= $forumPost["title"] ?></a>
                     <p><?php
-                        if(strlen($forumPost["Content"]) <=255){
-                            echo $forumPost["Content"];
+                        if(strlen($forumPost["content"]) <=255){
+                            echo $forumPost["content"];
                         }
                         else{
-                            echo substr($forumPost["Content"],0,255) . " ...";
+                            echo substr($forumPost["content"],0,255) . " ...";
                         }
                     ?></p>
                     <div class="uppload-date">
-                        <p><?= date("h:i d/m/Y",strtotime($forumPost["Date"])) ?></p>
+                        <p><?= date("h:i d/m/Y",strtotime($forumPost["time"])) ?></p>
                     </div>
                     <div class="user-name">
 

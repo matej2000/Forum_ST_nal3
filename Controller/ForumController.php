@@ -15,7 +15,7 @@ class ForumController {
         }
         $hits = ForumDB::search($query);
         foreach($hits as $key => $hit){
-            if($hit["Pos_IdPost"] != null){
+            if($hit["post_idpost"] != null){
                 unset($hits[$key]);
             }
         }
@@ -26,10 +26,10 @@ class ForumController {
         if(isset($_GET["id"])){
             $forum = ForumDB::get($_GET["id"]);
             $comments = ForumDB::getComments($_GET["id"]);
-            $authorF = UserDB::getUser($forum["Id"]);
+            $authorF = UserDB::getUser($forum["user_iduser"]);
             $usersC = [];
             foreach($comments as $comment){
-                array_push($usersC, UserDB::getUser($comment["Id"]));
+                array_push($usersC, UserDB::getUser($comment["user_iduser"]));
             }
             
             // TODO: PREVERI ČE OBSTAJA
@@ -77,7 +77,7 @@ class ForumController {
         $category = ForumDB::getCategory($_GET["idc"]);
         $hits = ForumDB::categoryPosts($_GET["idc"], $query);
         foreach($hits as $key => $hit){
-            if($hit["Pos_IdPost"] != null){
+            if($hit["post_idpost"] != null){
                 unset($hits[$key]);
             }
         }

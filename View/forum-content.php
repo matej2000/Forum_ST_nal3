@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= CSS_URL . "content.css" ?>">
-    <?php include("View/import.php"); ?>
+    <?php 
+        include("View/import.php"); 
+        
+    ?>
     <title>Forum</title>
 </head>
 <?php if(isset($_SESSION["username"])){
@@ -14,24 +17,33 @@
     else{
         include("View/user-notlogin-header.php");
     }
+
+    if($forum["post_idpost"] != null){
+        echo "dela";
+        ViewHelper::redirect(BASE_URL . "forum?id=" . $forum["post_idpost"]);
+    }
+
 ?>
 <body>
     <div class="container">
         <div class="post">
-            <h1><?= $forum["Title"] ?></h1>
+            <h1><?= $forum["title"] ?></h1>
             <div class="user">
                 <p> <?php 
+                    if(isset($author)){
+                        
+                    }
                     if(is_array($author)){
-                        echo $author["UserName"];
+                        echo $author["username"];
                     }
                     ?> 
                 </p>
             </div>
             <div>
-                <p><?= $forum["Content"] ?> </p>
+                <p><?= $forum["content"] ?> </p>
             </div>
             <div class="uppload-date">
-                <p><?= date("h:i d/m/Y",strtotime($forum["Date"])) ?></p>
+                <p><?= date("h:i d/m/Y",strtotime($forum["time"])) ?></p>
             </div>
         </div>
         <h2>Comments</h2>
@@ -39,11 +51,11 @@
             <?php foreach($comments as $key => $comment):?>
                 <div class="comment">
                     <div class="user">
-                        <p><?= $usersc[$key]["UserName"] ?> </p>
+                        <p><?= $usersc[$key]["username"] ?> </p>
                     </div>
-                    <p><?= $comment["Content"] ?> </p>
+                    <p><?= $comment["content"] ?> </p>
                     <div class="uppload-date">
-                        <p><?= date("h:i d/m/Y",strtotime($comment["Date"])) ?></p>
+                        <p><?= date("h:i d/m/Y",strtotime($comment["time"])) ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -51,9 +63,9 @@
                 <form action="<?= BASE_URL . "forum/comment" ?>" method="post">
                     <p><label>Add comment</label></br> 
                     <textarea style="resize:none" name="content" rows="10" cols="40" required></textarea></p>
-                    <input type="hidden" name="IdC" value="<?= $forum["IdC"] ?>"/>
-                    <input type="hidden" name="Pos_IdPost" value="<?= $forum["IdPost"] ?>"/>
-                    <input type="hidden" name="Id" value="<?= $forum["Id"] ?>"/>
+                    <input type="hidden" name="IdC" value="<?= $forum["idcategory"] ?>"/>
+                    <input type="hidden" name="Pos_IdPost" value="<?= $forum["idpost"] ?>"/>
+                    <input type="hidden" name="Id" value="<?= $forum["userid"] ?>"/>
                     <button class="btn btn-primary" type="submit">Comment</button>
                 </form>
             </div>

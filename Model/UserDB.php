@@ -8,7 +8,7 @@ class UserDB {
     public static function validLoginAttempt($username, $password) {
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("SELECT password FROM User WHERE UserName= :username");
+        $query = $db->prepare("SELECT password FROM user WHERE username= :username");
         $query->bindParam(":username", $username);
         $query->execute();
 
@@ -47,7 +47,7 @@ class UserDB {
 
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("SELECT COUNT(Id) FROM User WHERE UsernNme= :username OR Email = :email");
+        $query = $db->prepare("SELECT COUNT(iduser) FROM user WHERE username= :username OR email = :email");
         $query->bindParam(":username", $username);
         $query->bindParam(":email", $email );
         $query->execute();
@@ -67,11 +67,13 @@ class UserDB {
     public static function register($username, $email, $birthday, $password){
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("INSERT INTO User (UserName, Email, Birthday, Password) VALUES (:username, :email, :birthday, :password);");
+        $query = $db->prepare("INSERT INTO user (username, email, birthday, create_time, password) VALUES (:username, :email, :birthday, :create_time, :password);");
 
         $query->bindParam(":username", $username);
         $query->bindParam(":email", $email );
         $query->bindParam(":birthday", $birthday);
+        $d = date('Y-m-d H:i:s');
+        $query->bindParam(":create_time", $d);
         $hash= password_hash($password, PASSWORD_DEFAULT);
         $query->bindParam(":password", $hash);
         $query->execute();
@@ -80,7 +82,7 @@ class UserDB {
     public static function getId($username){
         $db = DBInit::getInstance();
 
-        $query = $db->prepare("SELECT Id FROM User WHERE UserName = :username");
+        $query = $db->prepare("SELECT iduser FROM user WHERE username = :username");
         $query->bindParam(":username", $username);
         $query->execute();
 
@@ -90,7 +92,7 @@ class UserDB {
     public static function getUser($id){
         $db = DBInit::getInstance();
         
-        $query = $db->prepare("SELECT Id, UserName, Email  FROM User WHERE Id = :Id");
+        $query = $db->prepare("SELECT iduser, username, email  FROM user WHERE iduser = :Id");
         $query->bindParam(":Id", $id);
         $query->execute();
 

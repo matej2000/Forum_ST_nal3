@@ -25,31 +25,33 @@
                 <div class="post">
                     <a href="
                         <?php 
-                            if($hit["Pos_IdPost"] != null){
-                                echo BASE_URL . "forum?id=" . $hit["Pos_IdPost"];
+                            if($hit["post_idpost"] != null){
+                                echo BASE_URL . "forum?id=" . $hit["post_idpost"];
                             }
                             else{
-                                echo BASE_URL . "forum?id=" . $hit["IdPost"];
+                                echo BASE_URL . "forum?id=" . $hit["idpost"];
                             }
                         ?>
                     ">
                         <?php 
-                            if($hit["Pos_IdPost"] != null){
+                            if($hit["post_idpost"] != null){
                                 echo "Comment: ";
                             }
+                            else{
+                                echo $hit["title"];
+                            }
                         ?>
-                        <?= $hit["Title"] ?>
                     </a>
                     <p><?php
-                        if(strlen($hit["Content"]) <=255){
-                            echo $hit["Content"];
+                        if(strlen($hit["content"]) <=255){
+                            echo $hit["content"];
                         }
                         else{
-                            echo substr($hit["Content"],0,255) . " ...";
+                            echo substr($hit["content"],0,255) . " ...";
                         }
                     ?></p>
                     <div class="uppload-date">
-                        <p><?= date("h:i d/m/Y",strtotime($hit["Date"])) ?></p>
+                        <p><?= date("h:i d/m/Y",strtotime($hit["time"])) ?></p>
                     </div>
                     <div class="user-name">
 
