@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `forum2.0`.`post` (
     REFERENCES `forum2.0`.`post` (`idpost`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = ndbcluster;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
