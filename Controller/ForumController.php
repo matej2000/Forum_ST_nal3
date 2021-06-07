@@ -98,8 +98,13 @@ class ForumController {
 
     public static function categoryAdd(){
         // TODO: preveri če kategorija s tem naslovom že obstaja
-        ForumDB::addCategory($_POST["title"], $_POST["content"]);
-        ViewHelper::redirect(BASE_URL . "forum/add");
+        if(ForumDB::existCategory($_POST["title"])){
+            ForumDB::addCategory($_POST["title"], $_POST["content"]);
+            ViewHelper::redirect(BASE_URL . "forum/category");
+        }
+        else{
+            ViewHelper::render("View/forum-add-categories.php", ["errorMessage" => "Category allready exists."]);
+        }
     }
 
     public static function myPosts(){

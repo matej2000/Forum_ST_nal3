@@ -93,6 +93,15 @@ class ForumDB{
         $query->execute();
     }
 
+    public static function existCategory($title){
+        $db = DBInit::getInstance();
+
+        $query = $db->prepare("SELECT COUNT(IdC) FROM Category WHERE TitleC= :title");
+        $query->bindParam(":title", $title);
+        $query->execute();
+        return $query->fetchColumn(0) == 0;
+    }
+
     public static function getMyPosts($id, $query){
         $db = DBInit::getInstance();
 
@@ -122,4 +131,5 @@ class ForumDB{
         $query->bindParam(":Likes", $v);
         $query->execute();
     }
+    
 }

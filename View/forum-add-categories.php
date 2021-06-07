@@ -28,7 +28,13 @@
                             <label>Description: <br />
                             <textarea style="resize:none" name="content" rows="10" cols="40" required></textarea></label>
                         </p>
-                    
+                        <span class="important">
+                            <?php
+                                if(isset($errorMessage)){
+                                    echo $errorMessage;
+                                }
+                            ?>
+                        </span>
                         <div class="c2">
                             <button class="btn btn-primary" type="submit">Add</button>
                         </div>
