@@ -52,16 +52,27 @@ class ForumController {
 
     public static function content(){
         if(isset($_GET["id"])){
+            // podatki o avtorju
             $forum = ForumDB::get($_GET["id"]);
-            $comments = ForumDB::getComments($_GET["id"]);
+            $forumL = ForumDB::isLIked($forum["user_iduser"], $forum["idpost"]);
+            $forumLC = ForumDB::countLikes($forum["idpost"]);
             $authorF = UserDB::getUser($forum["user_iduser"]);
+            // podatki o komentarjih
+            $comments = ForumDB::getComments($_GET["id"]);
             $usersC = [];
+            $commentsL = [];
+            $commentsLC = [];
             foreach($comments as $comment){
                 array_push($usersC, UserDB::getUser($comment["user_iduser"]));
+                array_push($commentsL, ForumDB::isLIked($comment["user_iduser"], $comment["idpost"]));
+                array_push($commentsLC, ForumDB::countLikes($comment["idpost"]));
             }
             
+            
             // TODO: PREVERI ČE OBSTAJA
-            ViewHelper::render("View/forum-content.php", ["forum" =>  $forum, "comments" => $comments, "author" => $authorF, "usersc" => $usersC]);
+            ViewHelper::render("View/forum-content.php", ["forum" =>  $forum, "foruml" => $forumL, "forumlc" => $forumLC, 
+            "comments" => $comments, "author" => $authorF, "usersc" => $usersC, "commentsl" => $commentsL, 
+            "commentslc" => $commentsLC]);
         }
         else{
             $query = "";

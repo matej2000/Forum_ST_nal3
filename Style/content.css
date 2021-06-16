@@ -27,3 +27,43 @@
     padding-top: 50px;
     text-align: center;
 }
+
+.vote {
+    display: inline-block;
+    overflow: hidden;
+    width: 40px;
+    height: 25px;
+    cursor: pointer;
+    background: url('http://i.stack.imgur.com/iqN2k.png');
+    background-position: 0 -25px;
+  } 
+  
+  
+  .vote.on {
+    background-position: 0 2px;
+  }
+
+  .vote2 {
+    display: inline-block;
+    overflow: hidden;
+    width: 40px;
+    height: 25px;
+    cursor: pointer;
+    background: url('http://i.stack.imgur.com/iqN2k.png');
+    background-position: 0 2px;
+  } 
+  
+  .vertical{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.vertical2{
+    display: inline-block;
+    width: 100px;
+}
+  
+  .vote2.on {
+    background-position: 0 -25px;
+  }

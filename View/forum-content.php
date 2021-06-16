@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= CSS_URL . "content.css" ?>">
+    <script type="text/javascript" src="<?= JS_URL . "uppvote.js" ?>"></script>
     <?php 
         include("View/import.php"); 
         
@@ -30,9 +31,6 @@
             <h1><?= $forum["title"] ?></h1>
             <div class="user">
                 <p> <?php 
-                    if(isset($author)){
-                        
-                    }
                     if(is_array($author)){
                         echo $author["username"];
                     }
@@ -43,6 +41,15 @@
                 <p><?= $forum["content"] ?> </p>
             </div>
             <div class="uppload-date">
+                <!-- popravi to da dela -->
+                <div class="vertical2">
+                    <div class="vertical">
+                        <span id="<?=$forum["idpost"]?>" class="<?php if($foruml){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
+                    </div>
+                    <div class="vertical">
+                        <span id="p<?=$forum["idpost"]?>"> <?=$forumlc?></span>
+                    </div>
+                </div>
                 <p><?= date("h:i d/m/Y",strtotime($forum["time"])) ?></p>
             </div>
         </div>
@@ -55,6 +62,14 @@
                     </div>
                     <p><?= $comment["content"] ?> </p>
                     <div class="uppload-date">
+                        <div class="vertical2">
+                            <div class="vertical">
+                                <span id="<?=$comment["idpost"]?>" class="<?php if($commentsl[$key]){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
+                            </div>
+                            <div class="vertical">
+                                <span id="p<?=$comment["idpost"]?>"> <?=$commentslc[$key]?></span>
+                            </div>
+                        </div>
                         <p><?= date("h:i d/m/Y",strtotime($comment["time"])) ?></p>
                     </div>
                 </div>

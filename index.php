@@ -18,7 +18,17 @@ $urls = [
             ForumController::search();
         } 
         else {
-            ForumController::content();
+            if(isset($_POST["idpost"])){
+                if(isset($_SESSION["username"])){
+                    ForumController::like();
+                }
+                else{
+                    ViewHelper::redirect(BASE_URL . "user/login");
+                }
+            }
+            else{
+                ForumController::content();
+            }
         }
         
     },
