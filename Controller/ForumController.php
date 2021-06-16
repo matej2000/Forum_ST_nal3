@@ -54,7 +54,13 @@ class ForumController {
         if(isset($_GET["id"])){
             // podatki o avtorju
             $forum = ForumDB::get($_GET["id"]);
-            $forumL = ForumDB::isLIked($forum["user_iduser"], $forum["idpost"]);
+            $forumL = ForumDB::isLIked(end($_SESSION["id"]), $forum["idpost"]);
+            if($forumL){
+                $forumL = 1;
+            }
+            else{
+                $forumL = 0;
+            }
             $forumLC = ForumDB::countLikes($forum["idpost"]);
             $authorF = UserDB::getUser($forum["user_iduser"]);
             // podatki o komentarjih
@@ -64,7 +70,13 @@ class ForumController {
             $commentsLC = [];
             foreach($comments as $comment){
                 array_push($usersC, UserDB::getUser($comment["user_iduser"]));
-                array_push($commentsL, ForumDB::isLIked($comment["user_iduser"], $comment["idpost"]));
+                if(ForumDB::isLIked(end($_SESSION["id"]), $comment["idpost"])){
+                    array_push($commentsL, 1);
+                }
+                else{
+                    //echo "ni lajkav" . end($_SESSION["id"]) . $hit["idpost"];
+                    array_push($commentsL, 0);
+                }
                 array_push($commentsLC, ForumDB::countLikes($comment["idpost"]));
             }
             

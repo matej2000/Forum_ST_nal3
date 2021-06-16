@@ -35,6 +35,14 @@
                         echo $author["username"];
                     }
                     ?> 
+                    <div class="vertical2">
+                        <div class="vertical">
+                            <span id="<?=$forum["idpost"]?>" class="<?php if($foruml){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
+                        </div>
+                        <div class="vertical">
+                            <span id="p<?=$forum["idpost"]?>"> <?=$forumlc?></span>
+                        </div>
+                    </div>
                 </p>
             </div>
             <div>
@@ -42,14 +50,7 @@
             </div>
             <div class="uppload-date">
                 <!-- popravi to da dela -->
-                <div class="vertical2">
-                    <div class="vertical">
-                        <span id="<?=$forum["idpost"]?>" class="<?php if($foruml){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
-                    </div>
-                    <div class="vertical">
-                        <span id="p<?=$forum["idpost"]?>"> <?=$forumlc?></span>
-                    </div>
-                </div>
+                
                 <p><?= date("h:i d/m/Y",strtotime($forum["time"])) ?></p>
             </div>
         </div>
@@ -58,10 +59,7 @@
             <?php foreach($comments as $key => $comment):?>
                 <div class="comment">
                     <div class="user">
-                        <p><?= $usersc[$key]["username"] ?> </p>
-                    </div>
-                    <p><?= $comment["content"] ?> </p>
-                    <div class="uppload-date">
+                        <p><?= $usersc[$key]["username"] ?>
                         <div class="vertical2">
                             <div class="vertical">
                                 <span id="<?=$comment["idpost"]?>" class="<?php if($commentsl[$key]){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
@@ -70,6 +68,10 @@
                                 <span id="p<?=$comment["idpost"]?>"> <?=$commentslc[$key]?></span>
                             </div>
                         </div>
+                    </p>
+                    </div>
+                    <p><?= $comment["content"] ?> </p>
+                    <div class="uppload-date">
                         <p><?= date("h:i d/m/Y",strtotime($comment["time"])) ?></p>
                     </div>
                 </div>

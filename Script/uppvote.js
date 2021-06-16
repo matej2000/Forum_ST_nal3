@@ -10,11 +10,17 @@ function like(e){
     if (this.readyState == 4 && this.status == 200) {
       var url = this.responseURL.split("/");
       if(url[url.length - 1] == "login"){
-        window.location.href = '../user/login';
+        var url2 = window.location.href.split("/");
+        /*if(url2[url2.length - 2] == "forum"){
+          //window.location.href = '../user/login';
+        }
+        else{
+          //window.location.href = 'user/login';
+        }*/
+        window.location.href = this.responseURL;
+        
       }
       else{
-        // kaj nardi ko vrne
-        // posodobi count
         uppvote(e);
         var izpis = this.responseText.split("/");
         var count = document.getElementById("p" + e.id);
@@ -25,7 +31,6 @@ function like(e){
   };
   xmlhttp.open("POST", "", true);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  //var params = {"idpost": e.id}
   xmlhttp.send("idpost=" + e.id);
 }
 

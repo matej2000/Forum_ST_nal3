@@ -23,6 +23,7 @@ $urls = [
                     ForumController::like();
                 }
                 else{
+                    echo BASE_URL;
                     ViewHelper::redirect(BASE_URL . "user/login");
                 }
             }
