@@ -60,11 +60,21 @@ $urls = [
     },
     "forum/category" => function(){
         if (isset($_GET["idc"])){
-            ForumController::categoryPosts();
+            if(isset($_POST["idpost"])){
+                if(isset($_SESSION["username"])){
+                    ForumController::like();
+                }
+                else{
+                    echo BASE_URL;
+                    ViewHelper::redirect(BASE_URL . "user/login");
+                }
+            }
+            else{
+                ForumController::categoryPosts();
+            }
         }
         else{
             ForumController::searchCategory();
-            //TODO: kaj se zgodi ko idc ni nastavljen
         }
     },
     "forum/addcategory" => function(){

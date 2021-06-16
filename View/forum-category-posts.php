@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= CSS_URL . "main.css" ?>">
+    <script type="text/javascript" src="<?= JS_URL . "uppvote.js" ?>"></script>
     <?php include("View/import.php"); ?>
     <title>Search category</title>
 </head>
@@ -26,8 +27,16 @@
         </div>
         <h1>Category: <?=$category["name"] ?></h1>
         <div class="posts">
-            <?php foreach ($hits as $forumPost): ?>
+            <?php foreach ($hits as $key => $forumPost): ?>
                 <div class="post">
+                    <div class="vertical2">
+                        <div class="vertical">
+                            <span id="<?=$forumPost["idpost"]?>" class="<?php if($likes[$key]){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
+                        </div>
+                        <div class="vertical">
+                            <span id="p<?=$forumPost["idpost"]?>"> <?=$alllikes[$key]?></span>
+                        </div>
+                    </div>
                     <a href="<?= BASE_URL . "forum?id=" . $forumPost["idpost"] ?>"><?= $forumPost["title"] ?></a>
                     <p><?php
                         if(strlen($forumPost["content"]) <=255){

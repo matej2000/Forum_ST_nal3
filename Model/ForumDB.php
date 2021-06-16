@@ -76,7 +76,7 @@ class ForumDB{
         $db = DBInit::getInstance();
 
         $statement = $db->prepare("SELECT * FROM post
-            WHERE category_idcategory = :IdC AND (title LIKE :query OR content LIKE :query) ORDER BY likes");
+            WHERE category_idcategory = :IdC AND post_idpost IS NULL AND (title LIKE :query OR content LIKE :query) ORDER BY likes");
         $statement->bindParam(":IdC", $idc);
         $queryt = '%' . $query . '%';
         $statement->bindParam(":query", $queryt);

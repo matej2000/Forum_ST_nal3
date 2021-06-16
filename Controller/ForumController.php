@@ -14,7 +14,6 @@ class ForumController {
             $query = "";
         }
         $hits = ForumDB::search($query);
-        // FIXME: dodaj pogoj pri sql query where post_idpost == null in zbrisi to spodaj
         /*foreach($hits as $key => $hit){
             if($hit["post_idpost"] != null){
                 unset($hits[$key]);
@@ -42,10 +41,6 @@ class ForumController {
         foreach($hits as $hit){
             array_push($allLikes, ForumDB::countLikes($hit["idpost"]));
         }
-        // TODO: pridobi lajke za vse poste
-        /*foreach($allLikes as $l){
-            echo $l;
-        }*/
 
         ViewHelper::render("View/forum-search.php", ["hits" => $hits, "query" => $query, "likes" => $likesC, "alllikes" => $allLikes]);
     }
@@ -132,7 +127,30 @@ class ForumController {
                 unset($hits[$key]);
             }
         }
-        ViewHelper::render("View/forum-category-posts.php", ["hits" => $hits, "query" => $query, "category" => $category]);
+        $likesC = [];
+        if(isset($_SESSION["username"])){
+            foreach($hits as $hit){
+                if(ForumDB::isLIked(end($_SESSION["id"]), $hit["idpost"])){
+                    array_push($likesC, 1);
+                }
+                else{
+                    //echo "ni lajkav" . end($_SESSION["id"]) . $hit["idpost"];
+                    array_push($likesC, 0);
+                }
+                
+            }
+        }
+        else{
+            foreach($hits as $hit){
+                array_push($likesC, 0);
+            }
+        }
+        $allLikes = [];
+        foreach($hits as $hit){
+            array_push($allLikes, ForumDB::countLikes($hit["idpost"]));
+        }
+
+        ViewHelper::render("View/forum-category-posts.php", ["hits" => $hits, "query" => $query, "category" => $category, "likes" => $likesC, "alllikes" => $allLikes]);
     }
 
     public static function searchCategory(){
