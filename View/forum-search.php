@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= CSS_URL . "main.css" ?>">
     <link rel="stylesheet" href="<?= CSS_URL . "headerStyle.css" ?>">
+    <script type="text/javascript" src="<?= JS_URL . "uppvote.js" ?>"></script>
     <?php include("View/import.php"); ?>
     <title>Document</title>
 </head>
@@ -16,7 +17,9 @@
     else{
             include("View/user-notlogin-header.php");
         }
+        //if($likes[$key]){echo "uppvote(this)";}
 ?>
+
 <body>
     <div class="container">
         <div class="search">
@@ -27,8 +30,17 @@
         </div>
         <h1>Resoults</h1>
         <div class="posts">
-            <?php foreach ($hits as $forumPost): ?>
+            <?php foreach ($hits as $key => $forumPost): ?>
                 <div class="post">
+                    <div class="vertical2">
+                        <div class="vertical">
+                            <span id="<?=$forumPost["idpost"]?>" class="<?php if($likes[$key]){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
+                        </div>
+                        <div class="vertical">
+                            <span id="p<?=$forumPost["idpost"]?>"> <?=$alllikes[$key]?></span>
+                        </div>
+                    </div>
+                        
                     <a href="<?= BASE_URL . "forum?id=" . $forumPost["idpost"] ?>"><?= $forumPost["title"] ?></a>
                     <p><?php
                         if(strlen($forumPost["content"]) <=255){

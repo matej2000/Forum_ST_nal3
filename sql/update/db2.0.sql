@@ -87,9 +87,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `forum2.0`.`like`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `forum2.0`.`like` ;
+DROP TABLE IF EXISTS `forum2.0`.`likes` ;
 
-CREATE TABLE IF NOT EXISTS `forum2.0`.`like` (
+CREATE TABLE IF NOT EXISTS `forum2.0`.`likes` (
   `idlikes` INT NOT NULL AUTO_INCREMENT,
   `user_iduser` INT NOT NULL,
   `post_idpost` INT NOT NULL,

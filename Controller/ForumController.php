@@ -14,12 +14,40 @@ class ForumController {
             $query = "";
         }
         $hits = ForumDB::search($query);
-        foreach($hits as $key => $hit){
+        // FIXME: dodaj pogoj pri sql query where post_idpost == null in zbrisi to spodaj
+        /*foreach($hits as $key => $hit){
             if($hit["post_idpost"] != null){
                 unset($hits[$key]);
             }
+        }*/
+        $likesC = [];
+        if(isset($_SESSION["username"])){
+            foreach($hits as $hit){
+                if(ForumDB::isLIked(end($_SESSION["id"]), $hit["idpost"])){
+                    array_push($likesC, 1);
+                }
+                else{
+                    //echo "ni lajkav" . end($_SESSION["id"]) . $hit["idpost"];
+                    array_push($likesC, 0);
+                }
+                
+            }
         }
-        ViewHelper::render("View/forum-search.php", ["hits" => $hits, "query" => $query]);
+        else{
+            foreach($hits as $hit){
+                array_push($likesC, 0);
+            }
+        }
+        $allLikes = [];
+        foreach($hits as $hit){
+            array_push($allLikes, ForumDB::countLikes($hit["idpost"]));
+        }
+        // TODO: pridobi lajke za vse poste
+        /*foreach($allLikes as $l){
+            echo $l;
+        }*/
+
+        ViewHelper::render("View/forum-search.php", ["hits" => $hits, "query" => $query, "likes" => $likesC, "alllikes" => $allLikes]);
     }
 
     public static function content(){
@@ -126,5 +154,20 @@ class ForumController {
     public static function comment(){
         ForumDB::comment($_POST["IdC"], $_POST["Pos_IdPost"], $_POST["Id"], "", $_POST["content"]);
         ViewHelper::redirect(BASE_URL . "forum?id=" . $_POST["Pos_IdPost"]);
+    }
+
+    public static function like(){
+
+        if(ForumDB::isLiked(end($_SESSION["id"]), $_POST["idpost"])){
+            ForumDB::unlike(end($_SESSION["id"]), $_POST["idpost"]);
+            $likes = ForumDB::countLikes($_POST["idpost"]);
+            echo "" . $_POST["idpost"] . "/" . $likes . "/unlike";
+        }
+        else{
+            ForumDB::like(end($_SESSION["id"]), $_POST["idpost"]);
+            $likes = ForumDB::countLikes($_POST["idpost"]);
+            echo "" . $_POST["idpost"] . "/" . $likes . "/like";
+        }
+
     }
 }

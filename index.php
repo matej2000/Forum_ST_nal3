@@ -7,6 +7,7 @@ session_start();
 
 define("BASE_URL", $_SERVER["SCRIPT_NAME"] . "/");
 define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "Style/");
+define("JS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "Script/");
 
 
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
@@ -22,7 +23,18 @@ $urls = [
         
     },
     "forum/search" => function(){
-        ForumController::search();
+        //if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if(isset($_POST["idpost"])){
+            if(isset($_SESSION["username"])){
+                ForumController::like();
+            }
+            else{
+                ViewHelper::redirect(BASE_URL . "user/login");
+            }
+        }
+        else{
+            ForumController::search();
+        }
     },
     "forum/add" => function(){
         if ($_SERVER["REQUEST_METHOD"] == "POST"){

@@ -6,9 +6,10 @@ class ForumDB{
     
     public static function search($query){
         $db = DBInit::getInstance();
-
-        $statement = $db->prepare("SELECT idpost, post_idpost, title, content, time, likes FROM post
-            WHERE title LIKE :query OR content LIKE :query ORDER BY likes");
+        $statement = $db->prepare("SELECT idpost, post_idpost, title, content, time, likes FROM post WHERE post_idpost IS NULL AND 
+        (title LIKE :query OR content LIKE :query)  ORDER BY time");
+        /*$statement = $db->prepare("SELECT idpost, post_idpost, title, content, time, likes FROM post
+            WHERE title LIKE :query OR content LIKE :query ORDER BY likes");*/
         $statement->bindValue(":query", '%' . $query . '%');
         $statement->execute();
 
@@ -132,6 +133,45 @@ class ForumDB{
         $query->bindParam(":edited", $v);
         $query->bindParam(":Likes", $v);
         $query->execute();
+    }
+
+    public static function isLIked($iduser, $idpost){
+        $db = DBInit::getInstance();
+
+        $query = $db->prepare("SELECT COUNT(user_iduser) FROM likes WHERE user_iduser= :iduser AND post_idpost = :idpost");
+        $query->bindParam(":iduser", $iduser);
+        $query->bindParam(":idpost", $idpost);
+        $query->execute();
+        return $query->fetchColumn(0) > 0;
+    }
+
+    public static function unlike($iduser, $idpost){
+        $db = DBInit::getInstance();
+
+        $query = $db->prepare("DELETE FROM likes WHERE user_iduser=:iduser AND post_idpost=:idpost;");
+
+        $query->bindParam(":iduser", $iduser);
+        $query->bindParam(":idpost", $idpost);
+        $query->execute();
+    }
+
+    public static function like($iduser, $idpost){
+        $db = DBInit::getInstance();
+
+        $query = $db->prepare("INSERT INTO likes (user_iduser, post_idpost) VALUES (:iduser, :idpost);");
+
+        $query->bindParam(":iduser", $iduser);
+        $query->bindParam(":idpost", $idpost);
+        $query->execute();
+    }
+
+    public static function countLikes($idpost){
+        $db = DBInit::getInstance();
+
+        $query = $db->prepare("SELECT COUNT(user_iduser) FROM likes WHERE post_idpost = :idpost");
+        $query->bindParam(":idpost", $idpost);
+        $query->execute();
+        return $query->fetchColumn(0);
     }
     
 }
