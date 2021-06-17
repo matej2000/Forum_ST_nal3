@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= CSS_URL . "main.css" ?>">
+    <script type="text/javascript" src="<?= JS_URL . "uppvote.js" ?>"></script>
     <?php include("View/import.php"); ?>
     <title>My posts</title>
 </head>
@@ -21,37 +22,45 @@
         </div>
         <h1>My posts</h1>
         <div class="posts">
-            <?php foreach ($hits as $hit): ?>
+            <?php foreach ($hits as $key => $forumPost): ?>
                 <div class="post">
+                    <div class="vertical2">
+                        <div class="vertical">
+                            <span id="<?=$forumPost["idpost"]?>" class="<?php if($likes[$key]){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
+                        </div>
+                        <div class="vertical">
+                            <span id="p<?=$forumPost["idpost"]?>"> <?=$alllikes[$key]?></span>
+                        </div>
+                    </div>
                     <a href="
                         <?php 
-                            if($hit["post_idpost"] != null){
-                                echo BASE_URL . "forum?id=" . $hit["post_idpost"];
+                            if($forumPost["post_idpost"] != null){
+                                echo BASE_URL . "forum?id=" . $forumPost["post_idpost"];
                             }
                             else{
-                                echo BASE_URL . "forum?id=" . $hit["idpost"];
+                                echo BASE_URL . "forum?id=" . $forumPost["idpost"];
                             }
                         ?>
                     ">
                         <?php 
-                            if($hit["post_idpost"] != null){
+                            if($forumPost["post_idpost"] != null){
                                 echo "Comment: ";
                             }
                             else{
-                                echo $hit["title"];
+                                echo $forumPost["title"];
                             }
                         ?>
                     </a>
                     <p><?php
-                        if(strlen($hit["content"]) <=255){
-                            echo $hit["content"];
+                        if(strlen($forumPost["content"]) <=255){
+                            echo $forumPost["content"];
                         }
                         else{
-                            echo substr($hit["content"],0,255) . " ...";
+                            echo substr($forumPost["content"],0,255) . " ...";
                         }
                     ?></p>
                     <div class="uppload-date">
-                        <p><?= date("h:i d/m/Y",strtotime($hit["time"])) ?></p>
+                        <p><?= date("h:i d/m/Y",strtotime($forumPost["time"])) ?></p>
                     </div>
                     <div class="user-name">
 

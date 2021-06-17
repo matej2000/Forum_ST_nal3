@@ -122,11 +122,11 @@ class ForumController {
         }
         $category = ForumDB::getCategory($_GET["idc"]);
         $hits = ForumDB::categoryPosts($_GET["idc"], $query);
-        foreach($hits as $key => $hit){
+        /*foreach($hits as $key => $hit){
             if($hit["post_idpost"] != null){
                 unset($hits[$key]);
             }
-        }
+        }*/
         $likesC = [];
         if(isset($_SESSION["username"])){
             foreach($hits as $hit){
@@ -189,7 +189,30 @@ class ForumController {
               unset($hits[$key]);
             }
         }*/
-        ViewHelper::render("View/forum-myposts.php", ["hits" => $hits, "query" => $query]);
+
+        $likesC = [];
+        if(isset($_SESSION["username"])){
+            foreach($hits as $hit){
+                if(ForumDB::isLIked(end($_SESSION["id"]), $hit["idpost"])){
+                    array_push($likesC, 1);
+                }
+                else{
+                    array_push($likesC, 0);
+                }
+                
+            }
+        }
+        else{
+            foreach($hits as $hit){
+                array_push($likesC, 0);
+            }
+        }
+        $allLikes = [];
+        foreach($hits as $hit){
+            array_push($allLikes, ForumDB::countLikes($hit["idpost"]));
+        }
+
+        ViewHelper::render("View/forum-myposts.php", ["hits" => $hits, "query" => $query, "likes" => $likesC, "alllikes" => $allLikes]);
     }
 
     public static function comment(){

@@ -87,7 +87,12 @@ $urls = [
     },
     "forum/myposts" => function(){
         if(isset($_SESSION["username"])){
-            ForumController::myPosts();
+            if(isset($_POST["idpost"])){
+                ForumController::like();
+            }
+            else{
+                ForumController::myPosts();
+            }
         }
         else{
             ViewHelper::redirect(BASE_URL . "user/login");
