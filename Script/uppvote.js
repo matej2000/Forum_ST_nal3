@@ -38,3 +38,15 @@ function like(e){
 function uppvote(e){
   e.classList.toggle('on');
 }
+
+function private(e, value){
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      window.location.href = this.responseURL;
+    }
+  };
+  xmlhttp.open("POST", "", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send("idpost=" + e.id.substring(2) + "&private=" + value);
+}

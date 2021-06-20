@@ -6,7 +6,7 @@ class ForumDB{
     
     public static function search($query){
         $db = DBInit::getInstance();
-        $statement = $db->prepare("SELECT idpost, post_idpost, title, content, time, likes FROM post WHERE post_idpost IS NULL AND 
+        $statement = $db->prepare("SELECT idpost, post_idpost, title, content, time, likes, removed, edited FROM post WHERE post_idpost IS NULL AND 
         (title LIKE :query OR content LIKE :query)  ORDER BY time");
         /*$statement = $db->prepare("SELECT idpost, post_idpost, title, content, time, likes FROM post
             WHERE title LIKE :query OR content LIKE :query ORDER BY likes");*/
@@ -173,5 +173,13 @@ class ForumDB{
         $query->execute();
         return $query->fetchColumn(0);
     }
-    
+
+    public static function private($idpost, $value){
+        $db = DBInit::getInstance();
+        $query = $db->prepare("UPDATE post SET removed=:v WHERE idpost=:idpost");
+        $query->bindParam(":v", $value);
+        $query->bindParam(":idpost", $idpost);
+        $query->execute();
+    }
+
 }

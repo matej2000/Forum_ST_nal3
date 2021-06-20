@@ -20,12 +20,20 @@ $urls = [
         else {
             if(isset($_POST["idpost"])){
                 if(isset($_SESSION["username"])){
-                    ForumController::like();
+                    
+                    if(isset($_POST["private"])){
+                        // TODO: ČE JE PRIVATE = 1 NAREDI PRIVAT (POPRAVI BAZO) ČE JE 0 NAREDI JAVNO, VRNI STRAN PO VPISU V BAZO.
+                        ForumController::private();
+                    }
+                    else{
+                        ForumController::like();
+                    }
                 }
                 else{
                     echo BASE_URL;
                     ViewHelper::redirect(BASE_URL . "user/login");
                 }
+                
             }
             else{
                 ForumController::content();

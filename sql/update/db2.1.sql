@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `forum2.0`.`post` (
   `category_idcategory` INT NOT NULL,
   `post_idpost` INT NULL,
   `time` TIMESTAMP NOT NULL,
-  `private` TINYINT NOT NULL DEFAULT 0,
+  `removed` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idpost`),
   INDEX `fk_post_user_idx` (`user_iduser` ASC) VISIBLE,
   INDEX `fk_post_category1_idx` (`category_idcategory` ASC) VISIBLE,

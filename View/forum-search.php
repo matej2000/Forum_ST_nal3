@@ -31,32 +31,34 @@
         <h1>Resoults</h1>
         <div class="posts">
             <?php foreach ($hits as $key => $forumPost): ?>
-                <div class="post">
-                    <div class="vertical2">
-                        <div class="vertical">
-                            <span id="<?=$forumPost["idpost"]?>" class="<?php if($likes[$key]){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
+                <?php if($forumPost["removed"] == 0) : ?>
+                    <div class="post">
+                        <div class="vertical2">
+                            <div class="vertical">
+                                <span id="<?=$forumPost["idpost"]?>" class="<?php if($likes[$key]){echo "vote2";} else{echo "vote";}?>" onclick="like(this)"></span>
+                            </div>
+                            <div class="vertical">
+                                <span id="p<?=$forumPost["idpost"]?>"> <?=$alllikes[$key]?></span>
+                            </div>
                         </div>
-                        <div class="vertical">
-                            <span id="p<?=$forumPost["idpost"]?>"> <?=$alllikes[$key]?></span>
+                            
+                        <a href="<?= BASE_URL . "forum?id=" . $forumPost["idpost"] ?>"><?= $forumPost["title"] ?></a>
+                        <p><?php
+                            if(strlen($forumPost["content"]) <=255){
+                                echo $forumPost["content"];
+                            }
+                            else{
+                                echo substr($forumPost["content"],0,255) . " ...";
+                            }
+                        ?></p>
+                        <div class="uppload-date">
+                            <p><?= date("h:i d/m/Y",strtotime($forumPost["time"])) ?></p>
                         </div>
-                    </div>
-                        
-                    <a href="<?= BASE_URL . "forum?id=" . $forumPost["idpost"] ?>"><?= $forumPost["title"] ?></a>
-                    <p><?php
-                        if(strlen($forumPost["content"]) <=255){
-                            echo $forumPost["content"];
-                        }
-                        else{
-                            echo substr($forumPost["content"],0,255) . " ...";
-                        }
-                    ?></p>
-                    <div class="uppload-date">
-                        <p><?= date("h:i d/m/Y",strtotime($forumPost["time"])) ?></p>
-                    </div>
-                    <div class="user-name">
+                        <div class="user-name">
 
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>

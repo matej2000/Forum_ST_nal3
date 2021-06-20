@@ -234,4 +234,21 @@ class ForumController {
         }
 
     }
+
+    public static function private(){
+        $post = ForumDB::get($_POST["idpost"]);
+        if(end($_SESSION["id"]) == $post["user_iduser"]){
+            if($_POST["private"] == 0){
+                if($post["removed"] != 0){
+                    ForumDB::private($_POST["idpost"], 0);
+                }
+            }
+            else if ( $_POST["private"] == 1){
+                if($post["removed"] != 1){
+                    ForumDB::private($_POST["idpost"], 1);
+                }
+            }
+        }
+        ViewHelper::redirect(BASE_URL . "forum?id=" . $_POST["idpost"]);
+    }
 }
