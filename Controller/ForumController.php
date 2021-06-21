@@ -184,11 +184,15 @@ class ForumController {
             $query = "";
         }
         $hits = ForumDB::getMyPosts(end($_SESSION["id"]), $query);
-        /*foreach($hits as $key => $hit){
-            if($hit["Pos_IdPost"] != null){
-              unset($hits[$key]);
+        $parentNames = [];
+        foreach($hits as $key => $hit){
+            if($hit["post_idpost"] == null){
+                $parentNames[$key] = null;
             }
-        }*/
+            else{
+                $parentNames[$key] = ForumDB::get($hit["post_idpost"])["title"];
+            }
+        }
 
         $likesC = [];
         if(isset($_SESSION["username"])){
@@ -212,7 +216,7 @@ class ForumController {
             array_push($allLikes, ForumDB::countLikes($hit["idpost"]));
         }
 
-        ViewHelper::render("View/forum-myposts.php", ["hits" => $hits, "query" => $query, "likes" => $likesC, "alllikes" => $allLikes]);
+        ViewHelper::render("View/forum-myposts.php", ["hits" => $hits, "query" => $query, "likes" => $likesC, "alllikes" => $allLikes, "parent" => $parentNames]);
     }
 
     public static function comment(){

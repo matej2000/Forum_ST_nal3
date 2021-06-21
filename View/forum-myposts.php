@@ -44,7 +44,7 @@
                     ">
                         <?php 
                             if($forumPost["post_idpost"] != null){
-                                echo "Comment: ";
+                                echo "Comment on: " . $parent[$key];
                             }
                             else{
                                 echo $forumPost["title"];
