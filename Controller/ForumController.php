@@ -255,4 +255,24 @@ class ForumController {
         }
         ViewHelper::redirect(BASE_URL . "forum?id=" . $_POST["idpost"]);
     }
+
+    public static function editPost(){
+        $post = ForumDB::get($_POST["idpost"]);
+        $category = ForumDB::getCategory($post["category_idcategory"]);
+        if(end($_SESSION["id"]) == $post["user_iduser"]){
+            ViewHelper::render("View/forum-edit.php", ["post" => $post, "category" => $category]);
+        }
+    }
+
+    public static function updatePost(){
+        $post = ForumDB::get($_POST["idpost"]);
+        if(end($_SESSION["id"]) == $post["user_iduser"]){
+            echo "daa";
+            if($post["title"] != $_POST["title"] || $post["content"] != $_POST["content"]){
+                ForumDB::updatePost($_POST["idpost"], $_POST["title"], $_POST["content"]);
+                echo $_POST["content"];
+            }
+        }
+        ViewHelper::redirect(BASE_URL . "forum?id=" .$_POST["idpost"]);
+    }
 }

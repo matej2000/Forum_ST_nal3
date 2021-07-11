@@ -182,4 +182,13 @@ class ForumDB{
         $query->execute();
     }
 
+    public static function updatePost($idpost, $title, $content){
+        $db = DBInit::getInstance();
+        $query = $db->prepare("UPDATE post SET edited=1, title=:title, content=:content WHERE idpost=:idpost");
+        $query->bindParam(":title", $title);
+        $query->bindParam(":content", $content);
+        $query->bindParam(":idpost", $idpost);
+        $query->execute();
+    }
+
 }

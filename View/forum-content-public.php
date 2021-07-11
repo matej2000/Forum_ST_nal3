@@ -25,12 +25,17 @@
     <div class="edit">
             <?php if(isset($_SESSION["id"])){
                 if(end($_SESSION["id"]) == $author["iduser"]){
+                    echo ' <form  action="'. BASE_URL . 'forum" method="post">
+                    <input type="hidden" name="idpost" value="' . $forum["idpost"] . '" />
+                    <input type="hidden" name="edit" value="1" />
+                    <button id="e' . $forum["idpost"] . '" type="submit"> edit </button>
+                    </form>';
                     if($forum["removed"] == 0){
-                        echo '<a src=""> edit </a> |';
+                        //echo '<a id="e' . $forum["idpost"] . '" onclick="edit(this)"> edit </a> |';
                         echo '<a id="pr' . $forum["idpost"] . '" onclick="private(this, 1)"> private </a>';
                     }
                     else{
-                        echo '<a src=""> edit </a> |';
+                        //echo '<a id="e' . $forum["idpost"] . '" onclick="edit(this)"> edit </a> |';
                         echo '<a id="pr' . $forum["idpost"] . '" onclick="private(this, 0)"> make public </a>';
                     }
                 }

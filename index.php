@@ -25,6 +25,16 @@ $urls = [
                         // TODO: ČE JE PRIVATE = 1 NAREDI PRIVAT (POPRAVI BAZO) ČE JE 0 NAREDI JAVNO, VRNI STRAN PO VPISU V BAZO.
                         ForumController::private();
                     }
+                    else if(isset($_POST["edit"])){
+                        if(isset($_POST["title"]) && isset($_POST["content"])){
+                            echo "tukaj";
+                            ForumController::updatePost();
+                        }
+                        else{
+                            echo "tukaj2";
+                            ForumController::editPost();
+                        }
+                    }
                     else{
                         ForumController::like();
                     }
@@ -112,6 +122,11 @@ $urls = [
         }
         else{
             ViewHelper::redirect(BASE_URL . "user/login");
+        }
+    },
+    "forum/edit" => function() {
+        if(isset($_SESSION["username"])){
+            ForumController::updatePost();
         }
     },
     "user/login" => function() {

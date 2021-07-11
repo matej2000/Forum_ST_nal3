@@ -63,7 +63,7 @@
 .inputs2 input, textarea{
     width: 100%;
     padding: .6em .7em;
-    max-width: 40 !important;
+    /*max-width: 40 !important;*/
 }
 
 .inputs2{

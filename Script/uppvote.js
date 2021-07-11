@@ -50,3 +50,16 @@ function private(e, value){
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("idpost=" + e.id.substring(2) + "&private=" + value);
 }
+
+/*function edit(e){
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      //window.location.href = this.responseURL;
+      alert(this.responseText);
+    }
+  };
+  xmlhttp.open("POST", "", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send("idpost=" + e.id.substring(1) + "&edit=" + 1);
+}*/
