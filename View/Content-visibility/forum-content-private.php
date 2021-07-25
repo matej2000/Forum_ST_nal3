@@ -1,7 +1,7 @@
 <?php 
 if(end($_SESSION["id"]) == $author["iduser"]){
     echo "<h1>This post has been made private</h2>";
-    include ("View/forum-content-public.php");
+    include ("View/Content-visibility/forum-content-public.php");
 }
 else{
     echo '<div class="post">
