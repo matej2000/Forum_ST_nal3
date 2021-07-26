@@ -2,10 +2,16 @@
 
 class DBInit {
 
-    private static $host = "localhost";
+    /*private static $host = "localhost";
     private static $user = "root";
     private static $password = "root";
     private static $schema = "forum2.0";
+    private static $instance = null;*/
+
+    private static $host = "sql11.freemysqlhosting.net";
+    private static $user = "sql11427771";
+    private static $password = "nereBpaCBZ";
+    private static $schema = "sql11427771";
     private static $instance = null;
 
     private function __construct() {
