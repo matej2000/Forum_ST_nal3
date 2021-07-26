@@ -23,7 +23,34 @@
         <p><?= date("h:i d/m/Y",strtotime($forum["time"])) ?></p>
     </div>
     <div class="edit">
-            <?php if(isset($_SESSION["id"])){
+            
+            <?php if(isset($_SESSION["id"])) :?>
+                <?php if(end($_SESSION["id"]) == $author["iduser"]): ?>
+                    <div class="line">
+                        <form  action=<?= BASE_URL . "forum" ?> method="post">
+                            <input type="hidden" name="idpost" value="<?= $forum["idpost"] ?>" />
+                            <input type="hidden" name="edit" value="1" />
+                            <button id=<?= "e" . $forum["idpost"] ?> type="submit"> edit </button>
+                        </form>
+                        <?php if($forum["removed"] == 0): ?>
+                            <a id=<?="pr" . $forum["idpost"]?> onclick="private(this, 1)" class="tools"> private </a>
+                        <?php else : ?>
+                            <a id=<?= "pr" . $forum["idpost"]?> onclick="private(this, 0)" class="tools"> make public </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif ?>
+            <?php endif ?>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <?php /*if(isset($_SESSION["id"])){
                 if(end($_SESSION["id"]) == $author["iduser"]){
                     echo ' <form  action="'. BASE_URL . 'forum" method="post">
                     <input type="hidden" name="idpost" value="' . $forum["idpost"] . '" />
@@ -32,13 +59,13 @@
                     </form>';
                     if($forum["removed"] == 0){
                         //echo '<a id="e' . $forum["idpost"] . '" onclick="edit(this)"> edit </a> |';
-                        echo '<a id="pr' . $forum["idpost"] . '" onclick="private(this, 1)"> private </a>';
+                        echo '<a id="pr' . $forum["idpost"] . '" onclick="private(this, 1)" class="tools"> private </a>';
                     }
                     else{
                         //echo '<a id="e' . $forum["idpost"] . '" onclick="edit(this)"> edit </a> |';
-                        echo '<a id="pr' . $forum["idpost"] . '" onclick="private(this, 0)"> make public </a>';
+                        echo '<a id="pr' . $forum["idpost"] . '" onclick="private(this, 0)" class="tools"> make public </a>';
                     }
                 }
-            }?>
+            }*/?>
     </div>
 </div>
