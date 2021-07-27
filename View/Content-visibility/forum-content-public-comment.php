@@ -1,7 +1,7 @@
 <div class="comment">
     <div clss="user">
         <?php if($forum["removed"] == 1) : ?>
-            <p> This comment has been made private. </p>
+            <p class="private"> This comment has been made private. </p>
         <?php endif; ?>
         <p> 
             <?= $author["username"]?>

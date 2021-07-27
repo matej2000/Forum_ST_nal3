@@ -95,3 +95,7 @@
   .line button:hover, .line a:hover{
     color: #0095ff;
   }
+
+  .private{
+    color: #f48024;
+  }

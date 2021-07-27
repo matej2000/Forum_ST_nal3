@@ -30,7 +30,7 @@
         <div class="post">
             <?php if($forum["removed"] == 1){
                 if($forum["user_iduser"] != end($_SESSION["id"])){
-                    echo "<h1>This post has been made private.";
+                    echo '<h1 class="private"> This post has been made private.</h1>';
                 }
                 else{
                     contentHelp::privatePost($forum, $author, $foruml, $forumlc);
