@@ -1,5 +1,8 @@
 # MyForum
 
+MySql hosting: https://www.freemysqlhosting.net </br>
+URL: https://myforum.azurewebsites.net
+
 ## Uvod
 
 MyForum je splošno namesnki forum. Narejen je bil za seminarsko nalogo pri predemtu Spletne tehnologije. Spletna aplikacija ima mvc strukturo. Forum omogoča naslednje funkcionalnosti:
